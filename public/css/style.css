@@ -1,0 +1,187 @@
+.header {
+  padding: 10px 0;
+  border-bottom: 1px solid #000;
+}
+.header .inner-logo img {
+  max-width: 150px;
+  max-height: 50px;
+}
+
+.header .inner-menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.header .inner-menu ul li {
+  padding: 5px 20px;
+  list-style: none;
+}
+
+.header .inner-menu ul li a {
+  text-decoration: none;
+}
+.footer {
+  padding: 10px 0;
+  background: #6a7482;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+}
+
+/*css product*/
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+.inner-title {
+  color: green;
+}
+.product-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.product-item:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+/* hình ảnh */
+.product-item .inner-image {
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.product-item .inner-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* nội dung */
+.product-item .inner-content {
+  padding: 15px;
+}
+
+/* tên sản phẩm */
+.product-item .inner-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* giá mới */
+.product-item .inner-price-new {
+  color: #e74c3c;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* giá cũ */
+.product-item .inner-price-old {
+  color: #999;
+  text-decoration: line-through;
+  margin-top: 5px;
+}
+
+/* giảm giá */
+.product-item .inner-discount {
+  display: inline-block;
+  background: red;
+  color: white;
+  padding: 4px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+/* tiêu đề box */
+.box-head {
+  margin-bottom: 20px;
+}
+
+.box-head .inner-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* CARD */
+.card {
+  background: #fff;
+}
+
+/* IMAGE */
+.product-image {
+  text-align: center;
+}
+
+.product-image img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.product-image img:hover {
+  transform: scale(1.03);
+}
+
+/* TITLE */
+.product-title {
+  font-weight: 600;
+}
+
+/* PRICE */
+.price-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.new-price {
+  color: #e74c3c;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.discount {
+  background: #e74c3c;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* INPUT */
+.quantity-input {
+  width: 100px;
+  border-radius: 8px;
+}
+
+/* BUTTON */
+.btn-danger {
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* DESC */
+.product-desc {
+  background: #f8f9fa;
+  padding: 15px 18px;
+  border-radius: 10px;
+  line-height: 1.6;
+}

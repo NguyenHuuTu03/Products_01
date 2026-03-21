@@ -1,0 +1,343 @@
+/* header */
+.header {
+  background: #343a40;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* logo */
+.header .inner-logo a {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* menu */
+.header .inner-menu ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .inner-menu ul li {
+  margin-left: 20px;
+}
+
+.header .inner-menu ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header .inner-menu ul li a:hover {
+  color: #ffc107;
+}
+
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f6fa;
+}
+
+/* ================= HEADER ================= */
+
+.header {
+  background: #343a40;
+  padding: 15px 20px;
+}
+
+.header .inner-logo a {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* ================= LAYOUT ================= */
+
+.body {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sider {
+  width: 220px;
+  background: #212529;
+  color: #fff;
+}
+
+.sider .inner-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sider .inner-menu ul li {
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.sider .inner-menu ul li a {
+  display: block;
+  padding: 14px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.sider .inner-menu ul li a:hover {
+  background: #0d6efd;
+  padding-left: 25px;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* ================= TITLE ================= */
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* ================= BUTTON ================= */
+
+.btn-primary {
+  font-weight: 500;
+  padding: 7px 16px;
+}
+
+/* ================= TABLE ================= */
+
+table {
+  background: #ffffff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* header bảng */
+
+table thead {
+  background: #343a40;
+  color: #ffffff;
+}
+
+table thead th {
+  text-align: center;
+  padding: 12px;
+  vertical-align: middle;
+}
+
+/* nội dung bảng */
+
+table tbody td {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+/* hover row */
+
+table tbody tr:hover {
+  background: #f2f2f2;
+}
+
+/* ================= IMAGE ================= */
+
+table tbody img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* ================= STATUS BADGE ================= */
+
+.badge {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+/* ================= ACTION BUTTON ================= */
+
+table .btn {
+  padding: 4px 10px;
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.btn-warning {
+  color: #fff;
+}
+
+/* ================= ALIGN COLUMN ================= */
+
+table tbody td:first-child,
+table tbody td:nth-child(2),
+table tbody td:nth-child(4),
+table tbody td:nth-child(5),
+table tbody td:last-child {
+  text-align: center;
+}
+
+/* ================= FOOTER ================= */
+
+.footer {
+  background: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+.d-flex {
+  margin-bottom: 20px;
+}
+.d-flex select,
+.d-flex input {
+  height: 38px;
+}
+
+.d-flex button {
+  height: 38px;
+  padding: 0 18px;
+}
+
+.form-select {
+  border-radius: 6px;
+}
+
+.form-control {
+  border-radius: 6px;
+}
+
+.btn-primary {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Show Alert */
+[show-alert] {
+  position: fixed;
+  top: 70px;
+  right: 15px;
+  z-index: 9999;
+}
+[show-alert].alert-hidden {
+  animation-name: alert-hidden;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+@keyframes alert-hidden {
+  from {
+    right: 15px;
+  }
+  to {
+    right: -100%;
+    display: none;
+  }
+}
+[show-alert] [close-alert] {
+  background: #ffffffc4;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* End Show Alert */
+
+.preview-image {
+  position: relative; /* để làm mốc cho nút */
+  display: inline-block;
+}
+
+.preview-image img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.close-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%); /* đẩy ra ngoài góc cho đẹp */
+
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: #fff;
+}
+
+/* ===== TABLE ===== */
+.table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* ===== IMAGE ===== */
+.image-wrapper {
+  text-align: center;
+}
+
+.product-img {
+  width: 50%;
+  max-width: 420px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  padding: 6px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+.product-img:hover {
+  transform: scale(1.03);
+}
+
+/* ===== DESCRIPTION ===== */
+.product-desc {
+  background: #f8f9fa;
+  padding: 15px 18px;
+  border-radius: 10px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  border-radius: 8px;
+}

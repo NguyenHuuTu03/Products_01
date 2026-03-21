@@ -1,0 +1,95 @@
+extends ../../layouts/default.pug
+
+block main
+  .container-fluid.mt-4
+
+    // ===== HEADER + ACTION =====
+    .d-flex.justify-content-between.align-items-center.mb-3
+      h4.mb-0 Chi tiết sản phẩm
+
+      .d-flex.gap-2
+        a.btn.btn-warning(
+          href=`${prefixAdmin}/products/edit/${product._id}`
+        ) Sửa
+
+        //- a.btn.btn-danger(
+        //-   href=`${prefixAdmin}/products/delete/${product._id}?_method=DELETE`
+        //-   onclick="return confirm('Bạn có chắc muốn xóa?')"
+        //- ) Xóa
+        form(action=`${prefixAdmin}/products/delete/${product._id}?_method=DELETE`
+          method="POST"
+          style="display:inline;"
+        )
+          button.btn.btn-danger(
+            type="submit"
+            onclick="return confirm('Bạn có chắc muốn xóa?')"
+          ) Xóa
+
+        a.btn.btn-secondary(
+          href=`${prefixAdmin}/products`
+        ) Quay lại
+
+    // ===== CARD =====
+    .card.shadow-sm.border-0.rounded-4
+      .card-body
+
+        // ===== THÔNG TIN CHÍNH =====
+        h5.mb-3 Thông tin sản phẩm
+
+        table.table.table-hover.align-middle
+          tbody
+            tr
+              th Tiêu đề
+              td.fw-semibold #{product.title}
+
+            tr
+              th Giá
+              td #{product.price.toLocaleString()}$
+
+            tr
+              th Giảm giá
+              td #{product.discountPercentage}%
+
+            tr
+              th Giá sau giảm
+              td.text-danger.fw-bold
+                | #{(product.price * (100 - product.discountPercentage) / 100).toLocaleString()}$
+
+            tr
+              th Số lượng
+              td #{product.stock}
+
+            tr
+              th Vị trí
+              td #{product.position}
+
+            tr
+              th Trạng thái
+              td
+                if product.status == "active"
+                  span(class="badge bg-success px-3 py-2" button-change-status) Hoạt động
+                else
+                  span(class="badge bg-danger px-3 py-2" button-change-status) Dừng hoạt động
+
+        // ===== ẢNH =====
+        .mt-4
+          h5.mb-3 Ảnh sản phẩm
+
+          if product.thumbnail
+            .image-wrapper
+              img.product-img(src=product.thumbnail alt=product.title)
+          else
+            .text-muted Không có ảnh
+
+        // ===== MÔ TẢ =====
+        .mt-4
+          h5.mb-3 Mô tả sản phẩm
+
+          if product.description
+            .product-desc
+              | #{product.description}
+          else
+            .text-muted Không có mô tả
+
+  script(src="/admin/js/product.js")
+  script(src="/admin/js/script.js")

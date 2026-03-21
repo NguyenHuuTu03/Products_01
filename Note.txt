@@ -1,0 +1,99 @@
+
+------- Các thư viện cần cài đặt -------
+
+- npm i express 
+
+- npm i pug // để sử dụng viết layout theo pug
+
+- npm i dotenv // để sử dụng tạo một file .env để lưu thông tin bảo mật
+muốn sử dụng được ta phải nhúng vào file index.js --- require("dotenv").config();---
+
+- npm i --save-dev nodemon // để chạy nodejs
+
+- trong file package.json ở mục scripts: viết "start":"nodemon --inspect index.js"  // để khi chạy npm start 
+có thay đổi gì thì hệ thống sẽ tự động load
+
+- npm i mongoose // dùng để cài đặt thư viện kết nối với MongooseDB
+
+- npm i method-override // dùng để giả lập các phương thức HTTP như PUT, PATCH, DELETE từ form (mặc định form 
+chỉ có 2 method là GET và POST). Hãy lên trang express để đọc tài liệu để biết cách dùng
+
+- npm i body-parser // dùng để đọc dữ liệu mà client gửi lên server thông qua req.body (tức là trong form ta 
+nhập dữ liệu gửi lên thông qua controller thì trong controller ta console.log(req.body) nó sẽ trả về được dữ 
+liệu mà ta đã gửi). VD Nó được sử dụng để cập nhật trạng thái của nhiều sản phẩm . Hãy lên trang express để đọc tài liệu để biết cách dùng
+
+- trong mục controller hãy nhớ khi cần lấy dữ liệu từ database thì nhớ async/await
+
+- app.set('views', './views'); // có tác dụng khi truyền đường dẫn render thì nó luôn ở thư mục views
+
+- include là dùng để nhúng một đoạn pug nằm trong block main của một file pug vào một file pug khác
+
+- extends dùng để kế thừa layout để tái sử dụng
+
+- mixin giống như một hàm function, muốn sử dụng ta phải nhúng include rồi trước hàm phải có dấu +
+
+- app.use(express.static("public")); dùng để cho phép truy cập vào các file tĩnh (VD: http://localhost:3000/css/style.css) 
+mà không cần viết router (VD: link(rel="stylesheet", href="/css/style.css")
+script(src="/js/product.js")) thì server sẽ tự lấy từ thư mục public
+
+- req.query dùng để lấy các params trên url sau dấu ?
+
+- req.params dùng để lấy dữ liệu url theo dạng tham số động 
+VD: router.get("/products/:id", (req, res) => {   // thêm dấu : dùng để truyền tham số động
+  console.log(req.params);  // sẽ trả về một object {id: value}
+});
+
+- app.locals.prefixAdmin = systemConfig.prefixAdmin; dùng để khai báo một biến toàn cục có thể sử dụng ở bất kỳ file pug nào
+(app.locals.ten_bien) = ten_bien_nhung.key (do ở file nhúng thì exports là một object)
+
+- const regex = new RegExp("từ khoá tìm kiếm trên params(keyword="iphone"), "i"); // dùng để tìm gần đúng và không phân biệt chữ hoa chữ 
+thường (VD: nhập từ khoá iphone nó sẽ tìm các sản phẩm có từ iphone k phân biệt chữ hoa, thường )
+
+- quy tắc phân trang (bỏ qua sản phẩm)
+limit(số sản phẩm trong 1 trang)
+skip(số lượng sản phẩm bỏ qua) có ngĩa là trang 1 có 4sp thì sẽ bỏ qua 4sp đó để sang trang 2 là 4sp tiếp theo
+công thức tính: skip = (trang hiện tại - 1) * limit
+VD: đang đứng ở trang 2 và 4sp 1 trang thì skip = (2 - 1) * 4 = 4 thì trang 2 sẽ bắt đầu từ sản phẩm có index = 4(index bắt đầu = 0)
+
+- trong controller thì khi render đường dẫn luôn chỉ đến file pug để vẽ ra giao diện và các thành phần trong object
+thì trong file pug luôn sử dụng được mà không cần phải nhúng (sử dụng trực tiếp)
+
+- khi sử dụng forEach thì không cần return nhưng khi sử dụng map thì phải return
+
+-   a(href="javascript:;" class="badge bg-success") trong thẻ a có href="javascript:;" dùng để khi click sẽ k 
+chuyển trang mà để chạy javascript sẽ bắt sự kiện 
+
+- router.patch("/change-multi", controller.changeMulti); controller chỉ hoạt động khi truy cập đúng router, đúng method
+trong index_route ta chỉ cần sử dụng app.use là đủ và path truyền vào để nối với path trên
+
+- checked // dùng để kiểm tra checkbox có được tích hay chưa
+
+- querySelector("input[name='ids']"); // dùng để tìm thẻ input có class name ="ids"
+
+- querySelectorAll("input[name='id']:checked"); // dùng để tìm các thẻ input có class name = "id" và đã tích checkbox
+
+- truyền thẳng url khi ta không cần thêm dữ liệu lấy được bên js. Còn nối chuỗi url khi url đó không phải cố định
+
+- deleteOne / deleteMany // khi sử dụng là xoá luôn trong database
+
+- npm i express-flash // cài đặt để làm hiển thị thông báo . Hãy độc docs của nó để sử dụng
+phải cài thêm npm i cookie-parser và npm i express-session (khi cài thư viện nhớ phải nhúng vào)
+
+- const product = new Products({name: "abc"}, email: "abc@gmail.com) // tạo mới một sản phẩm
+- product.save() // lưu vào trong database
+
+- npm i mongoose-slug-updater dùng để tự động tạo slug
+
+- npm i multer dùng để có thể upload file ảnh từ máy tính 
+
+- trong validate thì sẽ có hàm next() dùng để cho phép nếu nó thoả mãn điều kiện bên trên thì sẽ chạy vào hàm next() 
+để đến hàm tiếp theo trong router
+
+- các hàm truyền vào trong route thì không cần truyền thêm res, req, next vì nó luôn có rồi nên k cần truyền
+
+- Username: huutu2503
+Password: huutu123
+
+- npm i mongodb // để có thể kết nối với DB online
+
+
