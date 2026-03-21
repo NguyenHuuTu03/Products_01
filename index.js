@@ -1,9 +1,9 @@
 const express = require("express");
 // nhúng file dùng require
-const route = require("./routes/client/index_route");
-const routeAdmin = require("./routes/admin/index_route");
-
 require("dotenv").config();
+const route = require("./routes/client/index_route");
+
+const routeAdmin = require("./routes/admin/index_route");
 
 const database = require("./config/database");
 
@@ -18,6 +18,7 @@ const flash = require('express-flash');
 const cookieParser = require("cookie-parser");
 
 const session = require("express-session");
+
 
 
 
