@@ -1,6 +1,7 @@
 const express = require("express");
 // nhúng file dùng require
 require("dotenv").config();
+
 const route = require("./routes/client/index_route");
 
 const routeAdmin = require("./routes/admin/index_route");
@@ -19,6 +20,7 @@ const cookieParser = require("cookie-parser");
 
 const session = require("express-session");
 
+const path = require('path');
 
 
 
@@ -45,10 +47,11 @@ app.use(session({
 }));
 app.use(flash());
 
+// TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
 // App local variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin; // tạo ra biến toàn cục sử dụng được trong tất cả các file pug
-
-
 
 app.use(express.static(`${__dirname}/public`)); // để hiểu file public khi đưa lên online
 

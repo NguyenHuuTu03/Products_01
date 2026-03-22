@@ -1,0 +1,13 @@
+mixin sort()
+  .col-md-4
+    div(sort)
+      select.form-select(sort-select)
+        option(value="") -- Chọn tiêu chí --
+        option(value="position-desc") Vị trí giảm dần
+        option(value="position-asc") Vị trí tăng dần
+        option(value="price-desc") Giá giảm dần
+        option(value="price-asc") Giá tăng dần
+        option(value="title-asc") Tiêu đề A-Z
+        option(value="title-desc") Tiêu đề Z-A
+  .col-md-2
+    button.btn.btn-outline-secondary(sort-reset) Reset
