@@ -1,10 +1,8 @@
 extends ../../layouts/default.pug
-include ../../mixins/alert.pug
-
+include ../../mixins/select-tree.pug
 block main 
-  +alertError(5000)
   h1(class="mb-4")
-  form(action=`${prefixAdmin}/products/create` id="form-create-product" method="POST" enctype="multipart/form-data")
+  form(action=`${prefixAdmin}/products-category/create` id="form-create-product-category" method="POST" enctype="multipart/form-data")
     div(class="form-group")
       label(for="title") Tiêu đề
       input(
@@ -14,6 +12,18 @@ block main
         name="title"
         required
       )
+    div(class="form-group") Danh mục cha
+      select(name="parent_id", id="parent_id", class="form-control") 
+        option(value="")  -- Chọn danh mục cha --
+        if(records)
+          +select-tree(records)
+    //-   input(
+    //-     type="text"
+    //-     class="form-control"
+    //-     id="parent_id"
+    //-     name="parent_id"
+    //-   )
+    
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(
@@ -21,36 +31,6 @@ block main
         id="desc"
         name="description"
         rows="5"
-      )
-    div(class="form-group")
-      label(for="price") Giá
-      input(
-        type="number"
-        class="form-control"
-        id="price"
-        name="price"
-        value="0"
-        min="0"
-      )
-    div(class="form-group")
-      label(for="discount") % Giảm giá
-      input(
-        type="number"
-        class="form-control"
-        id="discount"
-        name="discountPercentage"
-        value="0"
-        min="0"
-      )
-    div(class="form-group")
-      label(for="stock") Số lượng
-      input(
-        type="number"
-        class="form-control"
-        id="stock"
-        name="stock"
-        value="0"
-        min="0"
       )
     div(class="form-group" upload-image)
       label(for="thumbnail" class="d-block") Ảnh

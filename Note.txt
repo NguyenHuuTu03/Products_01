@@ -96,4 +96,5 @@ Password: huutu123
 
 - npm i mongodb // để có thể kết nối với DB online
 
+- biến toàn cục sẽ được lưu trên sever và phải hết một phiên mới được khởi tạo lại
 
