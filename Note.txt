@@ -98,3 +98,8 @@ Password: huutu123
 
 - biến toàn cục sẽ được lưu trên sever và phải hết một phiên mới được khởi tạo lại
 
+- npm i md5 // thư viện để mã hoá mật khẩu. Lên đọc doc để sử dụng
+
+- khi đăng nhập trước khi chuyển trang thì ta phải lưu token vào cookie (res.cookie("token", user.token);)
+- khi đăng xuất thì sẽ xoá token khỏi cookie (res.clearCookie("token");) 
+- lấy các cookie đã lưu thì sử dụng (req.cookies) trả về một object chứa các cặp key-value

@@ -1,11 +1,13 @@
 // [GET] /admin/products
 
 const Products = require("../../models/productModel");
+const ProductsCategory = require("../../models/products_category.model");
 
 const filtersStatusHelper = require("../../helpers/filterStatus");
 const searchHelper = require("../../helpers/search");
 const paginationHelper = require("../../helpers/pagination");
 const systemConfig = require("../../config/system");
+const createTreeHelper = require("../../helpers/create-tree");
 
 module.exports.products = async (req, res) => {
   // bộ lọc
@@ -45,7 +47,7 @@ module.exports.products = async (req, res) => {
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
 
-  console.log(products)
+  // console.log(products)
   res.render("admin/pages/products/index.pug", {
     pageTitle: "Danh sách sản phẩm",
     products: products,
@@ -148,8 +150,14 @@ module.exports.deleteItem = async (req, res) => {
 // Create Product
 // [GET] /admin/products/create 
 module.exports.create = async (req, res) => {
+  const find = {
+    deleted: false
+  }
+  const category = await ProductsCategory.find(find);
+  const newCategory = createTreeHelper.tree(category);
   res.render("admin/pages/products/create.pug", {
-    pageTitle: "Thêm mới sản phẩm"
+    pageTitle: "Thêm mới sản phẩm",
+    category: newCategory
   });
 }
 

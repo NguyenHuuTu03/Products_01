@@ -1,0 +1,62 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main
+  +alertSuccess(5000)
+  +alertError(5000)
+  h1(class="mb-4") Quản lý tài khoản
+
+  .card.mb-3
+    .card-header Danh sách tài khoản
+
+    .card-body
+      .row
+        .col-8
+        .col-4.text-right
+          a(
+            href=`${prefixAdmin}/accounts/create`
+            class="btn btn-outline-success"
+          ) + Thêm mới
+    table.table.table-hover.table-sm
+      thead
+        tr
+          th STT
+          th Avatar
+          th Họ tên
+          th Phân quyền
+          th Email
+          th Trạng thái
+          th Hành động
+      tbody
+        each item, index in records
+          tr
+            td #{index + 1}
+
+            td
+              if item.avatar
+                img(
+                  src=item.avatar
+                  alt=item.fullName
+                  width="80"
+                )
+              else
+                span.text-muted Không có
+
+            td #{item.fullName}
+
+            td #{item.role.title}
+
+            td #{item.email}
+
+            td
+              if item.status === "active"
+                button.badge.bg-success Hoạt động
+              else
+                button.badge.bg-danger Dừng hoạt động
+
+            td
+              a.btn.btn-sm.btn-warning.me-1(
+                href=`${prefixAdmin}/accounts/edit/${item._id}`
+              ) Sửa
+              a.btn.btn-sm.btn-danger(
+                href=`${prefixAdmin}/accounts/delete/${item._id}`
+              ) Xóa

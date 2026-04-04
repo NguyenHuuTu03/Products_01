@@ -1,21 +1,3 @@
-// button status
-
-const buttonStatus = document.querySelectorAll("[button-status]"); // tìm các button
-if (buttonStatus.length > 0) { // nếu tìm thấy
-  let url = new URL(window.location.href); // lấy url 
-  buttonStatus.forEach(button => { // duyệt qua từng button trong mảng
-    button.addEventListener("click", () => { // bắt sự kiện cho từng button
-      const status = button.getAttribute("button-status"); // lấy giá trị của attribute trong từng button
-      if (status) { // nếu có giá trị
-        url.searchParams.set("status", status); // thêm hoặc sửa lại params (key, value)
-      } else {
-        url.searchParams.delete("status"); // xoá params
-      }
-      window.location.href = url.href; // chuyển hướng đường dẫn
-    })
-  })
-}
-
 // form search
 const formSearch = document.querySelector("#form-search");
 
@@ -114,3 +96,17 @@ if (sort) {
   }
 }
 // End Sort
+
+// Show alert
+const showAlert = document.querySelector("[show-alert]");
+if (showAlert) {
+  const time = parseInt(showAlert.getAttribute("data-time"));
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, time);
+  const closeAlert = showAlert.querySelector("[close-alert]");
+  closeAlert.addEventListener("click", () => {
+    showAlert.classList.add("alert-hidden");
+  });
+}
+// End Show alert

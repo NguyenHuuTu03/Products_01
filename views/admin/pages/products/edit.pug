@@ -7,7 +7,7 @@ block main
   .d-flex.gap-2
     a.btn.btn-secondary(
       href=`${prefixAdmin}/products`) Quay lại
-  h1(class="mb-4") Chỉnh sửa sản phẩm
+  h1(class="mb-4") Cập nhật sản phẩm
   form(action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH` id="form-edit-product" method="POST" enctype="multipart/form-data")
     div(class="form-group")
       label(for="title") Tiêu đề
@@ -26,7 +26,7 @@ block main
         id="desc"
         name="description"
         rows="5"
-      ) #{product.description}
+      ) !{product.description}
       div(class="form-group")
         label(for="price") Giá
         input(

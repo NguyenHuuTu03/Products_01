@@ -1,9 +1,10 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/select-tree.pug
 
 block main 
   +alertError(5000)
-  h1(class="mb-4")
+  h1(class="mb-4") Tạo mới sản phẩm
   form(action=`${prefixAdmin}/products/create` id="form-create-product" method="POST" enctype="multipart/form-data")
     div(class="form-group")
       label(for="title") Tiêu đề
@@ -14,6 +15,13 @@ block main
         name="title"
         required
       )
+
+      div(class="form-group") Danh mục
+      select(name="product_category_id", id="product-category-id", class="form-control") 
+        option(value="")  -- Chọn danh mục --
+        if(category)
+          +select-tree(category)
+      
     div(class="form-group")
       label(for="desc") Mô tả
       textarea(
