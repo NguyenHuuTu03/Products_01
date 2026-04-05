@@ -5,6 +5,7 @@ include ../..//mixins/pagination.pug
 include ../..//mixins/form-change-multi.pug
 include ../..//mixins/alert.pug
 include ../..//mixins/sort.pug
+include ../..//mixins/moment.pug
 
 block main
   if(role.permission.includes("products_view"))
@@ -71,6 +72,8 @@ block main
                 th Giá
                 th Vị trí
                 th Trạng thái
+                th Người tạo
+                th Người sửa
                 th Hành động
             tbody
               each item, index in products
@@ -114,7 +117,15 @@ block main
                           data-status=item.status
                           data-id=item.id
                         ) Dừng hoạt động
-                                                            
+                  td.text-center
+                    p #{item.accountFullName}
+                    //- +momentDate(item.createdBy.createdAt)
+                  td.text-center
+                    - const updatedBy = item.updatedBy.slice(-1)[0]
+                    if(updatedBy)
+                      p #{updatedBy.FullName}
+                      //- +momentDate(updatedBy.updatedAt)
+
                   td
                     if(role.permission.includes("products_view"))
                       a(class="btn btn-secondary btn-sm" button-detail data-id=item.id href=`${prefixAdmin}/products/detail/${item.id}`) Chi tiết

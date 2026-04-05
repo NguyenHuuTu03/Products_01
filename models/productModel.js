@@ -15,11 +15,26 @@ const productSchema = new mongoose.Schema({
   thumbnail: String,
   status: String,
   position: Number,
+  createdBy: {
+    account_id: String,
+    createdAt: {
+      type: Date,
+      default: Date.now
+    }
+  },
   deleted: {
     type: Boolean,
     default: false // để mỗi khi thêm sản phẩm vào DB mà không có trường deleted thì nó mặc định là false
   },
-  deletedAt: Date,
+  // deletedAt: Date,
+  deletedBy: {
+    account_id: String,
+    deletedAt: Date
+  },
+  updatedBy: [{
+    account_id: String,
+    updatedAt: Date
+  }],
   slug: {
     type: String,
     slug: "title",

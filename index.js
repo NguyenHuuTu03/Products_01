@@ -22,6 +22,7 @@ const session = require("express-session");
 
 const path = require('path');
 
+const moment = require('moment');
 
 
 const app = express();
@@ -52,6 +53,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 
 // App local variables
 app.locals.prefixAdmin = systemConfig.prefixAdmin; // tạo ra biến toàn cục sử dụng được trong tất cả các file pug
+app.locals.moment = moment;
 
 app.use(express.static(`${__dirname}/public`)); // để hiểu file public khi đưa lên online
 

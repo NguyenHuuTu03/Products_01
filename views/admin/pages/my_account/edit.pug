@@ -1,0 +1,118 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  .container.mt-4
+    h2.mb-4 Tài khoản của tôi
+
+    // Alert thông báo
+    +alertSuccess(3000)
+    +alertError(3000)
+
+    .row
+      // Thông tin hiện tại
+      .col-md-4
+        .card.shadow-sm
+          .card-body.text-center
+            if user.avatar
+              img.rounded-circle.mb-3(
+                src=user.avatar,
+                width="120",
+                height="120"
+              )
+            else
+              img.rounded-circle.mb-3(
+                src="/images/default-avatar.png",
+                width="120",
+                height="120"
+              )
+
+            h5 #{user.fullName}
+            p.text-muted #{user.email}
+
+      // Form cập nhật
+      .col-md-8
+        .card.shadow-sm
+          .card-body
+            form(
+              action=`${prefixAdmin}/my-account/edit?_method=PATCH`
+              method="POST"
+              enctype="multipart/form-data"
+            )
+              .mb-3
+                label.form-label(for="fullName") Họ tên
+                input.form-control(
+                  type="text",
+                  name="fullName",
+                  id="fullName",
+                  value=user.fullName,
+                  required
+                )
+
+              .mb-3
+                label.form-label(for="email") Email
+                input.form-control(
+                  type="email",
+                  name="email",
+                  id="email",
+                  value=user.email,
+                  required
+                )
+
+              .mb-3
+                label.form-label(for="password") Mật khẩu 
+                input.form-control(
+                  type="password",
+                  name="password",
+                  id="password"
+                )
+
+              .mb-3
+                label.form-label(for="phone") Phone
+                input.form-control(
+                  type="text",
+                  name="phone",
+                  id="phone",
+                  value=user.phone,
+                  required
+                )
+
+              .mb-3(upload-image)
+                label(for="avatar" class="d-block") Ảnh
+                input(
+                  type="file"
+                  class="form-control-file d-block"
+                  style="margin-bottom:15px"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*" 
+                  upload-image-input
+                )
+              div(class="preview-image ")
+                img(src=user.avatar upload-image-preview class="d-block" style="width: 100px; height: 100px")
+                button(class="close-image") x
+
+              //- hr
+
+              //- h5.mb-3 Đổi mật khẩu
+
+              
+              //- .mb-3
+              //-   label.form-label(for="password") Mật khẩu mới
+              //-   input.form-control(
+              //-     type="password",
+              //-     name="password",
+              //-     id="password"
+              //-   )
+
+              //- .mb-3
+              //-   label.form-label(for="confirmPassword") Xác nhận mật khẩu
+              //-   input.form-control(
+              //-     type="password",
+              //-     name="confirmPassword",
+              //-     id="confirmPassword"
+              //-   )
+
+              div.mt-4.text-end
+                button.btn.btn-primary.px-4(type="submit") Cập nhật
+                a.btn.btn-secondary.px-4.ms-3(href=`${prefixAdmin}/my-account`) Quay lại

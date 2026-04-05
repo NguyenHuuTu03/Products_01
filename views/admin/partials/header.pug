@@ -6,4 +6,5 @@ header.header
           a(href="/admin/dashboard") ADMIN 
       .col-9.text-end
         div(class="text-right")
+        a.btn.btn-primary.btn-sm.me-3(href=`${prefixAdmin}/my-account`) #{user.fullName}
         a.btn.btn-danger.btn-sm(href=`${prefixAdmin}/auth/logout`) Đăng xuất

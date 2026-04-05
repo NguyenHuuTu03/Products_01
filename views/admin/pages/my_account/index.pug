@@ -1,0 +1,71 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+  .container.mt-4
+    h2.mb-4 Tài khoản của tôi
+
+    +alertSuccess(3000)
+    +alertError(3000)
+
+    .row
+      // Avatar + info
+      .col-md-4
+        .card.shadow-sm
+          .card-body.text-center
+            if user.avatar
+              img.rounded-circle.mb-3(
+                src=user.avatar,
+                width="120",
+                height="120"
+              )
+            else
+              img.rounded-circle.mb-3(
+                src="/images/default-avatar.png",
+                width="120",
+                height="120"
+              )
+
+            h5 #{user.fullName}
+            p.text-muted #{user.email}
+
+      // Thông tin chi tiết
+      .col-md-8
+        .card.shadow-sm
+          .card-body
+
+            // Họ tên
+            .mb-3
+              label.form-label Họ tên
+              p.form-control-plaintext #{user.fullName || 'Chưa cập nhật'}
+
+            // Email
+            .mb-3
+              label.form-label Email
+              p.form-control-plaintext #{user.email || 'Chưa cập nhật'}
+
+            // Phone
+            .mb-3
+              label.form-label Số điện thoại
+              p.form-control-plaintext #{user.phone || 'Chưa cập nhật'}
+
+            // Trạng thái
+            .mb-3
+              label.form-label Trạng thái
+              if user.status === "active"
+                span.badge.bg-success Hoạt động
+              else
+                span.badge.bg-danger Dừng hoạt động
+
+            // Phân quyền
+            .mb-3
+              label.form-label Phân quyền
+              p.form-control-plaintext #{user.role.title}
+
+            // Nút chỉnh sửa
+            .mt-4.text-end
+              a.btn.btn-primary.px-4(
+                href=`${prefixAdmin}/my-account/edit`
+              )
+                i.fa.fa-edit.me-2
+                |  Chỉnh sửa
