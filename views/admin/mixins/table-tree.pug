@@ -7,7 +7,7 @@ mixin table-tree(items, level = 1)
 
       td #{item.index}
 
-      td
+      td.text-center
         img(
           src=item.thumbnail
           alt=item.title
@@ -24,35 +24,51 @@ mixin table-tree(items, level = 1)
           style="width: 60px"
           min="1"
         )
+      if(role.permission.includes("products-category_edit"))
+        td.text-center
+          if item.status == "active"
+            a.badge.bg-success(
+              href="javascript:;"
+              data-status=item.status
+              data-id=item.id
+              data-button-change-status
+            ) Hoạt động
+          else
+            a.badge.bg-danger(
+              href="javascript:;"
+              data-status=item.status
+              data-id=item.id
+              data-button-change-status
+            ) Dừng hoạt động
+      else
+        td.text-center
+          if item.status == "active"
+            span.badge.bg-success(
+              data-status=item.status
+              data-id=item.id
+              data-button-change-status
+            ) Hoạt động
+          else
+            span.badge.bg-danger(
+              data-status=item.status
+              data-id=item.id
+              data-button-change-status
+            ) Dừng hoạt động
+        
 
       td
-        if item.status == "active"
-          a.badge.bg-success(
-            href="javascript:;"
-            data-status=item.status
+        if(role.permission.includes("products-category_view"))
+          a.btn.btn-secondary.btn-sm(
+            href=`${prefixAdmin}/products-category/detail/${item.id}`
+          ) Chi tiết
+        if(role.permission.includes("products-category_edit"))
+          a.btn.btn-warning.btn-sm(
+            href=`${prefixAdmin}/products-category/edit/${item.id}`
+          ) Sửa
+        if(role.permission.includes("products-category_delete"))
+          button.btn.btn-danger.btn-sm(
             data-id=item.id
-            data-button-change-status
-          ) Hoạt động
-        else
-          a.badge.bg-danger(
-            href="javascript:;"
-            data-status=item.status
-            data-id=item.id
-            data-button-change-status
-          ) Dừng hoạt động
-
-      td
-        a.btn.btn-secondary.btn-sm(
-          href=`${prefixAdmin}/products-category/detail/${item.id}`
-        ) Chi tiết
-
-        a.btn.btn-warning.btn-sm(
-          href=`${prefixAdmin}/products-category/edit/${item.id}`
-        ) Sửa
-
-        button.btn.btn-danger.btn-sm(
-          data-id=item.id
-          data-button-delete
-        ) Xóa
+            data-button-delete
+          ) Xóa
     if item.children && item.children.length > 0
       +table-tree(item.children, level + 1)

@@ -1,36 +1,37 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
-  +alertSuccess(5000)
-  +alertError(5000)
-  h1(class="mb-4") Thêm mới nhóm quyền
+  if(role.permission.includes("roles_edit"))
+    +alertSuccess(5000)
+    +alertError(5000)
+    h1(class="mb-4") Cập nhật nhóm quyền
 
-  form(
-    action=`${prefixAdmin}/roles/edit/${role.id}?_method=PATCH`
-    method="POST"
-  )
-    // ===== Tiêu đề =====
-    .form-group
-      label(for="title") Tiêu đề
-      input.form-control(
-        type="text"
-        id="title"
-        name="title"
-        required
-        value=role.title
-      ) 
+    form(
+      action=`${prefixAdmin}/roles/edit/${role.id}?_method=PATCH`
+      method="POST"
+    )
+      // ===== Tiêu đề =====
+      .form-group
+        label(for="title") Tiêu đề
+        input.form-control(
+          type="text"
+          id="title"
+          name="title"
+          required
+          value=role.title
+        ) 
 
-    // ===== Mô tả =====
-    .form-group
-      label(for="desc") Mô tả
-      input.form-control(
-        type="text"
-        id="desc"
-        name="description"
-        value=role.description
-      ) 
+      // ===== Mô tả =====
+      .form-group
+        label(for="desc") Mô tả
+        input.form-control(
+          type="text"
+          id="desc"
+          name="description"
+          value=role.description
+        ) 
 
-    // ===== Nút submit =====
-    .form-group
-    button.btn.btn-primary.mt-3(type="submit") Cập nhật
-    a.btn.btn-secondary.mt-3.ms-3(type="submit" href=`${prefixAdmin}/roles`) Trở lại
+      // ===== Nút submit =====
+      .form-group
+      button.btn.btn-primary.mt-3(type="submit") Cập nhật
+      a.btn.btn-secondary.mt-3.ms-3(type="submit" href=`${prefixAdmin}/roles`) Trở lại

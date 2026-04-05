@@ -1,47 +1,52 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
-  +alertSuccess(5000)
-  +alertError(5000)
-  h1(class="mb-4") Nhóm quyền
+  if(role.permission.includes("roles_view"))
+    +alertSuccess(5000)
+    +alertError(5000)
+    h1(class="mb-4") Nhóm quyền
 
-  .card.mb-3
-    .card-header Danh sách nhóm quyền
+    .card.mb-3
+      .card-header Danh sách nhóm quyền
 
-    .card-body
-      .row
-        .col-8
-        .col-4.text-right
-          a(
-            href=`${prefixAdmin}/roles/create`
-            class="btn btn-outline-success"
-          ) + Thêm mới
+      .card-body
+        .row
+          .col-8
+          .col-4.text-right
+            if(role.permission.includes("roles_create"))
+              a(
+                href=`${prefixAdmin}/roles/create`
+                class="btn btn-outline-success"
+              ) + Thêm mới
 
-      .row.mt-3
-        .col-12
-          table.table.table-hover.table-sm.table-bordered
-            thead
-              tr
-                th STT
-                th Nhóm quyền
-                th Mô tả ngắn
-                th Hành động
+        .row.mt-3
+          .col-12
+            table.table.table-hover.table-sm.table-bordered
+              thead
+                tr
+                  th STT
+                  th Nhóm quyền
+                  th Mô tả ngắn
+                  th Hành động
 
-            tbody
-              if(roles.length > 0)
-                each item, index in roles
-                  tr
-                    td #{index + 1}
-                    td #{item.title}
-                    td #{item.description}
-                    td
-                      a.btn.btn-sm.btn-secondary.me-1(
-                        href=`${prefixAdmin}/roles/detail/${item.id}`
-                      ) Chi tiết
-                      a.btn.btn-sm.btn-warning.me-1(
-                        href=`${prefixAdmin}/roles/edit/${item.id}`
-                      ) Sửa
-                      button.btn.btn-sm.btn-danger Xóa
-              else 
-                tr 
-                  td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo
+              tbody
+                if(roles.length > 0)
+                  each item, index in roles
+                    tr
+                      td #{index + 1}
+                      td #{item.title}
+                      td #{item.description}
+                      td
+                        if(role.permission.includes("roles_view"))
+                          a.btn.btn-sm.btn-secondary.me-1(
+                            href=`${prefixAdmin}/roles/detail/${item.id}`
+                          ) Chi tiết
+                        if(role.permission.includes("roles_edit"))
+                          a.btn.btn-sm.btn-warning.me-1(
+                            href=`${prefixAdmin}/roles/edit/${item.id}`
+                          ) Sửa
+                        if(role.permission.includes("roles_delete"))
+                          button.btn.btn-sm.btn-danger Xóa
+                else 
+                  tr 
+                    td(colspan="4" class="text-center") Chưa có nhóm quyền nào được tạo

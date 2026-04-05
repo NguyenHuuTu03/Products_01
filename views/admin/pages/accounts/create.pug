@@ -2,94 +2,95 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 
 block main
-  h1.mb-4 Thêm mới tài khoản
+  if(role.permission.includes("accounts_create"))
+    h1.mb-4 Thêm mới tài khoản
 
-  +alertError(5000)
+    +alertError(5000)
 
-  form(
-    action=`${prefixAdmin}/accounts/create`
-    method="POST"
-    enctype="multipart/form-data"
-  )
-    .card.shadow-sm
-      .card-body
+    form(
+      action=`${prefixAdmin}/accounts/create`
+      method="POST"
+      enctype="multipart/form-data"
+    )
+      .card.shadow-sm
+        .card-body
 
-        // Họ tên
-        .mb-3
-          label.form-label(for="fullName") Họ tên
-          input.form-control(
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="Nhập họ tên"
-            required
-          )
+          // Họ tên
+          .mb-3
+            label.form-label(for="fullName") Họ tên
+            input.form-control(
+              type="text"
+              id="fullName"
+              name="fullName"
+              placeholder="Nhập họ tên"
+              required
+            )
 
-        // Email
-        .mb-3
-          label.form-label(for="email") Email
-          input.form-control(
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Nhập email"
-            required
-          )
+          // Email
+          .mb-3
+            label.form-label(for="email") Email
+            input.form-control(
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Nhập email"
+              required
+            )
 
-        // Mật khẩu
-        .mb-3
-          label.form-label(for="password") Mật khẩu
-          input.form-control(
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Nhập mật khẩu"
-            
-          )
+          // Mật khẩu
+          .mb-3
+            label.form-label(for="password") Mật khẩu
+            input.form-control(
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Nhập mật khẩu"
+              
+            )
 
-        // Số điện thoại
-        .mb-3
-          label.form-label(for="phone") Số điện thoại
-          input.form-control(
-            type="text"
-            id="phone"
-            name="phone"
-            placeholder="Nhập số điện thoại"
-          )
+          // Số điện thoại
+          .mb-3
+            label.form-label(for="phone") Số điện thoại
+            input.form-control(
+              type="text"
+              id="phone"
+              name="phone"
+              placeholder="Nhập số điện thoại"
+            )
 
-        // Ảnh đại diện
-        .mb-3(upload-image)
-          label.form-label(for="avatar") Ảnh đại diện
-          input(
-            type="file"
-            class="form-control-file d-block"
-            style="margin-bottom:15px"
-            id="avatar"
-            name="avatar"
-            accept="image/*" 
-            upload-image-input
-          )
-          div(class="preview-image d-none")
-            img(src="" upload-image-preview class="d-block" style="width: 100px; height: 100px")
-            button(class="close-image") x
+          // Ảnh đại diện
+          .mb-3(upload-image)
+            label.form-label(for="avatar") Ảnh đại diện
+            input(
+              type="file"
+              class="form-control-file d-block"
+              style="margin-bottom:15px"
+              id="avatar"
+              name="avatar"
+              accept="image/*" 
+              upload-image-input
+            )
+            div(class="preview-image d-none")
+              img(src="" upload-image-preview class="d-block" style="width: 100px; height: 100px")
+              button(class="close-image") x
 
-        // Trạng thái
-        .mb-3
-          label.form-label(for="role_id") Phân quyền
-          select.form-select(name="role_id" id="role_id")
-            option(value="") -- Chọn phân quyền --
-            each item in roles
-              option(value=item.id) #{item.title}
-        .mb-3
-          label.form-label Trạng thái
-          select.form-select(name="status")
-            option(value="active") Hoạt động
-            option(value="inactive") Dừng hoạt động
+          // Trạng thái
+          .mb-3
+            label.form-label(for="role_id") Phân quyền
+            select.form-select(name="role_id" id="role_id")
+              option(value="") -- Chọn phân quyền --
+              each item in roles
+                option(value=item.id) #{item.title}
+          .mb-3
+            label.form-label Trạng thái
+            select.form-select(name="status")
+              option(value="active") Hoạt động
+              option(value="inactive") Dừng hoạt động
 
-      .card-footer.text-end
-        button.btn.btn-primary(type="submit")
-          i.fa.fa-save.me-1
-          | Tạo mới
-        a.btn.btn-secondary.ms-2(
-          href=`${prefixAdmin}/accounts`
-        ) Quay lại
+        .card-footer.text-end
+          button.btn.btn-primary(type="submit")
+            i.fa.fa-save.me-1
+            | Tạo mới
+          a.btn.btn-secondary.ms-2(
+            href=`${prefixAdmin}/accounts`
+          ) Quay lại
