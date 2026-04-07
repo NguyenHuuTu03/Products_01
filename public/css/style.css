@@ -1,25 +1,143 @@
+/* ===== HEADER ===== */
 .header {
   padding: 10px 0;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .header .inner-logo img {
-  max-width: 150px;
-  max-height: 50px;
+  max-width: 150px; /* chỉnh theo ý */
+  height: auto;
+  display: block;
+}
+
+/* ===== MENU ===== */
+.header .inner-menu {
+  overflow: visible;
 }
 
 .header .inner-menu ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-.header .inner-menu ul li {
-  padding: 5px 20px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.header .inner-menu ul li a {
-  text-decoration: none;
+/* canh menu bên phải */
+.header .inner-menu > ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 }
+
+/* mỗi item cha */
+.header .inner-menu > ul > li {
+  position: relative;
+}
+
+/* ===== LINK ===== */
+.header .inner-menu ul li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.header .inner-menu ul li a:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+/* ===== DROPDOWN CẤP 1 ===== */
+.header .inner-menu ul li > ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: 0.2s;
+  z-index: 9999;
+}
+
+/* nếu item nằm sát bên phải thì canh lại */
+.header .inner-menu > ul > li:last-child > ul {
+  right: 0;
+  left: auto;
+}
+
+/* vùng đệm chống mất hover */
+.header .inner-menu ul li > ul::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+/* hover cấp 1 */
+.header .inner-menu ul li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ===== DROPDOWN CẤP 2 ===== */
+.header .inner-menu ul li ul li {
+  position: relative;
+}
+
+/* submenu bên trái */
+.header .inner-menu ul li ul li > ul {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  left: auto;
+
+  min-width: 200px;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-10px);
+  transition: 0.2s;
+}
+
+/* hover cấp 2 */
+.header .inner-menu ul li ul li:hover > ul {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* ===== ITEM ===== */
+.header .inner-menu ul li ul li {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.header .inner-menu ul li ul li:last-child {
+  border-bottom: none;
+}
+
+/* ===== LINK CON ===== */
+.header .inner-menu ul li ul li a {
+  padding: 10px 14px;
+}
+
+.header .inner-menu ul li ul li a:hover {
+  background: #007bff;
+  color: #fff;
+}
+
 .footer {
   padding: 10px 0;
   background: #6a7482;

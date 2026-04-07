@@ -10,11 +10,12 @@ const productSchema = new mongoose.Schema({
   },
   description: String,
   price: Number,
+  position: Number,
   discountPercentage: Number,
   stock: Number,
   thumbnail: String,
   status: String,
-  position: Number,
+  featured: String,
   createdBy: {
     account_id: String,
     createdAt: {

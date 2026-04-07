@@ -9,7 +9,7 @@ module.exports.index = async (req, res) => {
   }).sort({
     position: "desc"
   });
-  console.log(products);
+  // console.log(products);
   const newProducts = products.map(item => {
     item.price_new = (item.price * (100 - item.discountPercentage) / 100).toFixed();
     return item;

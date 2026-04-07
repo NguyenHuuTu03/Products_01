@@ -105,3 +105,8 @@ Password: huutu123
 - lấy các cookie đã lưu thì sử dụng (req.cookies) trả về một object chứa các cặp key-value
 
 - npm i moment // thư viện để chuyển hoá thời gian, ngày tháng
+
+- res.locals.layoutProductCategory = newProductsCategory; // tạo biến toàn cục layoutProductCategory sử dụng được trong tất cả các file pug
+khi nhúng middleware vào roter mà trong middleware có tạo biến toàn cục thì các hàm controller của router đó đều sử dụng được 
+biến res.locals.tên_biến_đó
+- app.use(categoryMiddleware.category); có nghĩa là app luôn sử dụng
