@@ -27,15 +27,26 @@ module.exports.detail = async (req, res) => {
     const find = {
       deleted: false,
       status: "active",
-      slug: req.params.slug
+      slug: req.params.slugProduct
     }
     const product = await Products.findOne(find);
-    if (!product) {
-      // req.flash("error", "Không tìm thấy dữ liệu");
-      return res.redirect("/products");
+
+    if (product.product_category_id) {
+      const category = await productsCategory.findOne({
+        deleted: false,
+        status: "active",
+        _id: product.product_category_id
+      });
+      product.category = category;
+
     }
+    product.price_new = productsHelper.priceNew(product);
+    // if (!product) {
+    //   // req.flash("error", "Không tìm thấy dữ liệu");
+    //   return res.redirect("/products");
+    // }
     res.render("client/pages/products/detail", {
-      pageTitle: "Chi tiết sản phẩm",
+      pageTitle: product.title,
       product: product
     })
   } catch (error) {

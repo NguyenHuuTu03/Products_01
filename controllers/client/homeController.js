@@ -8,7 +8,9 @@ module.exports.index = async (req, res) => {
     status: "active",
     featured: "1"
   };
-  const productsFeatured = await Products.find(find).limit(6);
+  const productsFeatured = await Products.find(find).sort({
+    position: "desc"
+  }).limit(6);
   const newProductsFeatured = productsHelper.priceNewProduct(productsFeatured);
   const find1 = {
     deleted: false,

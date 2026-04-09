@@ -1,13 +1,24 @@
 include ../mixins/sub-menu.pug
+
 header.header
   .container 
     .row.align-items-center 
+
+      // ===== LOGO =====
       .col-3 
         .inner-logo 
           a(href="/")
             img(src="/images/logo.png", alt="logo")
 
-      .col-9 
+      // ===== SEARCH (Ở GIỮA) =====
+      .col-4
+        .inner-search
+          form(action="/search", method="GET")
+            input(type="text", name="keyword", placeholder="Tìm sản phẩm..." value=keyword)
+            button(type="submit") 🔍
+
+      // ===== MENU =====
+      .col-5 
         .inner-menu   
           ul 
             li 
@@ -17,4 +28,3 @@ header.header
               - const path = "/products"
               a(href=path) Sản phẩm
               +sub-menu(layoutProductCategory, path)
-              

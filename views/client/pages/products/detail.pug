@@ -18,13 +18,15 @@ block main
         .col-md-7
 
           h2.product-title.mb-3= product.title
+          h5 Danh mục 
+            a(href=`/products/${product.category.slug}`) #{product.category.title}
 
           // ===== GIÁ =====
           if product.discountPercentage > 0
             .price-box.mb-3
-              span.old-price #{product.price.toLocaleString()} đ
+              span.old-price #{product.price}$
               span.new-price
-                | #{(product.price * (100 - product.discountPercentage) / 100).toLocaleString()} đ
+                | #{product.price_new}$
               span.discount -#{product.discountPercentage}%
           else
             .price-box.mb-3
@@ -44,7 +46,7 @@ block main
           hr
 
           // ===== MUA HÀNG =====
-          form(action=`/cart/add/${product._id}` method="POST")
+          form(action=`/cart/add/${product.id}` method="POST")
             .d-flex.align-items-center.gap-2
 
               input.form-control.quantity-input(
@@ -52,6 +54,7 @@ block main
                 name="quantity"
                 value="1"
                 min="1"
+                max=product.stock
               )
 
               button.btn.btn-danger.btn-lg.flex-grow-1
@@ -63,6 +66,6 @@ block main
       h4.mb-3 Mô tả sản phẩm
 
       if product.description
-        .product-desc #{product.description}
+        .product-desc !{product.description}
       else
         p.text-muted Không có mô tả

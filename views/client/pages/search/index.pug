@@ -8,6 +8,8 @@ block main
     .row 
       .col-12 
         //- +alertError(5000)
-        +box_head(pageTitle) 
-    
-    +product-layout-grid(products)
+        +box_head("Kết quả tìm kiếm") 
+    if(products.length > 0)
+      +product-layout-grid(products)
+    else 
+      h5.tex-center Không tìm thấy kết quả
