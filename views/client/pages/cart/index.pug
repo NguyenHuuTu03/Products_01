@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.mt-4
+    h2.mb-4 🛒 Giỏ hàng của bạn
+
+    if cartDetail.products.length === 0
+      .alert.alert-warning Giỏ hàng trống!
+    else
+      table.table.table-bordered.align-middle
+        thead.table-dark
+          tr.text-center
+            th Ảnh
+            th Tên sản phẩm
+            th Giá
+            th Số lượng
+            th Thành tiền
+            th Hành động
+
+        tbody
+          each item in cartDetail.products
+            tr.text-center
+              td
+                img(src=item.productInfo.thumbnail width="80")
+              td #{item.productInfo.title}
+              td #{item.priceNew} $
+              td
+                input.form-control(type="number" name="quantity" product-id=item.product_id value=item.quantity min="1" style="width:80px")
+              td #{item.totalPrice} $
+              td
+                a.btn.btn-danger.btn-sm(href=`/cart/delete/${item.product_id}`) Xóa
+
+      hr
+
+      .text-end
+        h4 Tổng tiền: 
+          span.text-danger #{cartDetail.totalPrice} $
+        a.btn.btn-success.mt-2(href="/checkout") Thanh toán
+  script(src="/js/cart.js") 
