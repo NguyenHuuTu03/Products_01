@@ -1,0 +1,84 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.mt-4
+    h2.mb-4 
+      +box_head("Đặt hàng")
+    if(cartDetail.products.length > 0)
+      .row
+        .col-md-7
+          .card.shadow-sm.mb-4
+            .card-header.bg-dark.text-white
+              h5.mb-0 Giỏ hàng của bạn
+
+            .card-body.p-0
+              table.table.table-hover.align-middle.mb-0.table-bordered
+                thead.table-light
+                  tr.text-center
+                    th Ảnh
+                    th.text-start Tên sản phẩm
+                    th Giá
+                    th SL
+                    th Thành tiền
+
+                tbody
+                  each item in cartDetail.products
+                    tr.text-center
+                      td
+                        img(
+                          src=item.productInfo.thumbnail
+                          width="70"
+                          height="70"
+                          style="object-fit: cover; border-radius: 8px;"
+                        )
+                      td.text-start #{item.productInfo.title}
+                      td.text-danger #{item.priceNew} $
+                      td #{item.quantity}
+                      td.fw-bold #{item.totalPrice} $
+
+          .text-end.me-2
+            h4
+              | Tổng tiền: 
+              span.text-danger #{cartDetail.totalPrice} $
+
+        // ===== RIGHT: FORM =====
+        .col-md-5
+          .card.shadow-sm
+            .card-header.bg-success.text-white
+              h5.mb-0 Thông tin nhận hàng
+
+            .card-body
+              form(action="/checkout/order" method="POST")
+
+                .mb-3
+                  label.form-label Họ tên
+                  input.form-control(
+                    type="text"
+                    name="fullName"
+                    placeholder="Nhập họ tên..."
+                    required
+                  )
+
+                .mb-3
+                  label.form-label Số điện thoại
+                  input.form-control(
+                    type="text"
+                    name="phone"
+                    placeholder="Nhập số điện thoại..."
+                    required
+                  )
+
+                .mb-3
+                  label.form-label Địa chỉ
+                  input.form-control(
+                    type="text"
+                    name="address"
+                    placeholder="Nhập địa chỉ..."
+                    required
+                  )
+
+                button.btn.btn-success.w-100.mt-2(type="submit")
+                  | 🛒 Xác nhận đặt hàng
+    else 
+      h5.text-center(style="color:red") Vui lòng thêm sản phẩm vào giỏ hàng

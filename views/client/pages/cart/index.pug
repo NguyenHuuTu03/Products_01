@@ -22,7 +22,8 @@ block main
             tr.text-center
               td
                 img(src=item.productInfo.thumbnail width="80")
-              td #{item.productInfo.title}
+              td
+                a(href=`/products/detail/${item.productInfo.slug}`) #{item.productInfo.title}
               td #{item.priceNew} $
               td
                 input.form-control(type="number" name="quantity" product-id=item.product_id value=item.quantity min="1" style="width:80px")

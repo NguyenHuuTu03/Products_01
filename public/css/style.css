@@ -429,3 +429,9 @@
   cursor: pointer;
 }
 /* End Show Alert */
+
+a {
+  text-decoration: none;
+  color: green;
+  font-weight: 500;
+}

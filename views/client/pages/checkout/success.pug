@@ -1,0 +1,88 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-8
+        if(order)
+          .card.shadow-lg.p-4
+            // ===== HEADER =====
+            .text-center.mb-4
+              i.fa.fa-check-circle.text-success(style="font-size: 70px;")
+              h3.text-success.mt-2 Đặt hàng thành công!
+              p Cảm ơn bạn đã mua hàng 🎉
+
+            hr
+
+            // ===== THÔNG TIN KHÁCH HÀNG =====
+            h5.mb-3.text-primary Thông tin khách hàng
+            .mb-3
+              p
+                b Họ tên: 
+                | #{order.userInfo.fullName}
+              p
+                b Số điện thoại: 
+                | #{order.userInfo.phone}
+              p
+                b Địa chỉ: 
+                | #{order.userInfo.address}
+
+            hr
+
+            // ===== THÔNG TIN ĐƠN HÀNG =====
+            h5.mb-3.text-primary Thông tin đơn hàng
+            p
+              b Mã đơn: 
+              span.text-dark #{order.id}
+            p
+              b Trạng thái: 
+              span.text-warning #{order.status}
+            p
+              b Ngày đặt: 
+              span #{order.createdAt}
+
+            hr
+
+            // ===== DANH SÁCH SẢN PHẨM =====
+            h5.mb-3.text-primary Sản phẩm đã đặt
+
+            table.table.table-bordered.align-middle
+              thead.table-light
+                tr.text-center
+                  th Ảnh
+                  th Tên sản phẩm
+                  th Giá
+                  th SL
+                  th Thành tiền
+
+              tbody
+                each item in order.products
+                  tr.text-center
+                    td
+                      img(
+                        src=item.productInfo.thumbnail
+                        width="60"
+                        height="60"
+                        style="object-fit: cover; border-radius: 6px;"
+                      )
+                    td #{item.productInfo.title}
+                    td #{item.price} $
+                    td #{item.quantity}
+                    td #{item.totalPrice} $
+
+            // ===== TỔNG TIỀN =====
+            .text-end.mt-3
+              h4
+                | Tổng tiền: 
+                span.text-danger #{order.totalPrice} $
+
+            hr
+
+            // ===== BUTTON =====
+            .d-flex.justify-content-between
+              a.btn.btn-primary(href="/")
+                | 🏠 Trang chủ
+
+              a.btn.btn-success(href="/products")
+                | 🛒 Mua tiếp
