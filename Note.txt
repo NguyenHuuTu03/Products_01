@@ -110,3 +110,5 @@ Password: huutu123
 khi nhúng middleware vào roter mà trong middleware có tạo biến toàn cục thì các hàm controller của router đó đều sử dụng được 
 biến res.locals.tên_biến_đó
 - app.use(categoryMiddleware.category); có nghĩa là app luôn sử dụng
+
+- npm i nodemailer // thư viện dùng để gửi mã otp qua email

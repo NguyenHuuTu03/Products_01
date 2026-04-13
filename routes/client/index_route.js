@@ -8,6 +8,7 @@ const orderRoutes = require("./order.router");
 const userRoutes = require("./user.router");
 const userMiddleware = require("../../middlewares/client/user.middleware");
 
+
 module.exports = (app) => {
   app.use(categoryMiddleware.category);
   app.use(cartMiddleware.cartId);
