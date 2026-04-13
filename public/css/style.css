@@ -34,12 +34,13 @@
 /* mỗi item cha */
 .header .inner-menu > ul > li {
   position: relative;
+  text-align: center;
 }
 
 /* ===== LINK ===== */
 .header .inner-menu ul li a {
   display: block;
-  padding: 10px 8px;
+  padding: 10px 0px;
   color: #333;
   text-decoration: none;
   border-radius: 6px;

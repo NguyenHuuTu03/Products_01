@@ -1,0 +1,50 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.mt-4
+    h2.text-center.mb-4 Thông tin tài khoản
+
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow-sm
+          .card-body
+            if user
+              .text-center.mb-3
+                img(
+                  src=user.avatar || "/images/default-avatar.png"
+                  alt="avatar"
+                  width="100"
+                  height="100"
+                  style="border-radius: 50%; object-fit: cover;"
+                )
+
+              ul.list-group
+                li.list-group-item
+                  strong Họ tên:
+                  span.float-end= user.fullName
+
+                li.list-group-item
+                  strong Email:
+                  span.float-end= user.email
+
+                li.list-group-item
+                  strong Số điện thoại:
+                  span.float-end= user.phone || "Chưa cập nhật"
+
+                li.list-group-item
+                  strong Địa chỉ:
+                  span.float-end= user.address || "Chưa cập nhật"
+
+                li.list-group-item
+                  strong Trạng thái:
+                  span.float-end
+                    if user.status === "active"
+                      span.text-success Hoạt động
+                    else
+                      span.text-danger Bị khóa
+
+              .mt-4.text-center
+                a.btn.btn-primary(href="/user/info/edit") Chỉnh sửa thông tin
+                a.btn.btn-danger.ms-2(href="/user/logout") Đăng xuất
+            else
+              p.text-center.text-danger Không tìm thấy thông tin người dùng!

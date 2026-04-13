@@ -1,0 +1,78 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.mt-4
+    h2.text-center.mb-4 Chỉnh sửa thông tin
+
+    .row.justify-content-center
+      .col-md-6
+        .card.shadow-sm
+          .card-body
+            if user
+              form(method="POST", action="/user/info/edit", enctype="multipart/form-data")
+                
+                // Avatar
+                .mb-3.text-center(upload-image)
+                  img(
+                    src=user.avatar
+                    alt="avatar"
+                    width="100"
+                    height="100"
+                    style="border-radius: 50%; object-fit: cover;"
+                    upload-image-preview
+                  )
+                  .mt-2
+                    input(
+                      type="file"
+                      class="form-control-file d-block"
+                      style="margin-bottom:15px"
+                      id="avatar"
+                      name="avatar"
+                      accept="image/*" 
+                      upload-image-input
+                    )
+
+                // Họ tên
+                .mb-3
+                  label.form-label Họ tên
+                  input.form-control(
+                    type="text",
+                    name="fullName",
+                    value=user.fullName,
+                    required
+                  )
+
+                // Email (readonly)
+                .mb-3
+                  label.form-label Email
+                  input.form-control(
+                    type="email",
+                    name="email",
+                    value=user.email,
+                    readonly
+                  )
+
+                // SĐT
+                .mb-3
+                  label.form-label Số điện thoại
+                  input.form-control(
+                    type="text",
+                    name="phone",
+                    value=user.phone
+                  )
+
+                // Địa chỉ
+                .mb-3
+                  label.form-label Địa chỉ
+                  input.form-control(
+                    type="text",
+                    name="address",
+                    value=user.address
+                  )
+
+                // Nút submit
+                .d-flex.justify-content-between
+                  a.btn.btn-secondary(href="/user/info") ← Quay lại
+                  button.btn.btn-primary(type="submit") Lưu thay đổi
+            else
+              p.text-center.text-danger Không có dữ liệu để chỉnh sửa!
