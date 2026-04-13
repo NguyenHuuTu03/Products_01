@@ -1,0 +1,73 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main 
+  +alertError(5000)
+  h1(class="mb-4") #{pageTitle}
+  form(action=`${prefixAdmin}/settings/general?_method=PATCH`  method="POST" enctype="multipart/form-data")
+    div(class="form-group")
+      label(for="websiteName") Tên website
+      input(
+        type="text"
+        class="form-control"
+        id="websiteName"
+        name="websiteName"
+        required
+        value= settingGeneral? settingGeneral.websiteName : ""
+      )
+
+    div(class="form-group" upload-image)
+      label(for="logo" class="d-block") Logo
+      input(
+        type="file"
+        class="form-control-file d-block"
+        style="margin-bottom:15px"
+        id="logo"
+        name="logo"
+        accept="image/*" 
+        upload-image-input
+      )
+    div(class="preview-image ")
+      img(src=settingGeneral? settingGeneral.logo : "" upload-image-preview class="d-block" style="width: 100px; height: 100px")
+      button(class="close-image") x
+      //- lọc ra các file ảnh (chỉ được upload các file ảnh)
+      
+    div(class="form-group")
+      label(for="email") Email
+      input(
+        type="text"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        value= settingGeneral? settingGeneral.email : ""
+      )
+
+    div(class="form-group")
+      label(for="phone") Phone
+      input(
+        type="text"
+        class="form-control"
+        id="phone"
+        name="phone"
+        required
+        value= settingGeneral? settingGeneral.phone : ""
+      )
+
+    div(class="form-group")
+      label(for="copyright") Copyright
+      input(
+        type="text"
+        class="form-control"
+        id="copyright"
+        name="copyright"
+        required
+        value= settingGeneral? settingGeneral.copyright : ""
+      )
+    .mt-3
+      div(class="form-group")
+        button(
+          type="submit"
+          class="btn btn-primary"
+        ) Cập nhật
+    
