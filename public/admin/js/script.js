@@ -110,3 +110,52 @@ if (showAlert) {
   });
 }
 // End Show alert
+
+// canvas
+document.addEventListener("DOMContentLoaded", function () {
+
+  function safeParse(value) {
+    try {
+      return JSON.parse(value || "[]");
+    } catch (e) {
+      console.error("JSON parse error:", e, value);
+      return [];
+    }
+  }
+
+  const revenueEl = document.getElementById("revenueChart");
+  const productEl = document.getElementById("productChart");
+
+  if (revenueEl) {
+    const revenueData = safeParse(revenueEl.dataset.revenue);
+
+    new Chart(revenueEl, {
+      type: "line",
+      data: {
+        labels: ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12"],
+        datasets: [{
+          label: "Doanh thu ($)",
+          data: revenueData
+        }]
+      }
+    });
+  }
+
+  if (productEl) {
+    const productLabels = safeParse(productEl.dataset.labels);
+    const productData = safeParse(productEl.dataset.data);
+
+    new Chart(productEl, {
+      type: "line",
+      data: {
+        labels: productLabels,
+        datasets: [{
+          label: "Số lượng bán",
+          data: productData
+        }]
+      }
+    });
+  }
+
+});
+// end canvas

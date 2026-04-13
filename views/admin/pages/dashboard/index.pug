@@ -1,4 +1,56 @@
-extend ../../layouts/default.pug
+extends ../../layouts/default.pug
 
-block main 
-  h1 Trang tổng quan
+block main
+  .container-fluid.mt-4
+    h2.mb-4 Dashboard
+
+    .row
+      .col-md-3
+        .card.text-white.bg-primary.mb-3
+          .card-body
+            h5 Tổng sản phẩm
+            h3= stats.products.total || 0
+
+      .col-md-3
+        .card.text-white.bg-success.mb-3
+          .card-body
+            h5 Tổng người dùng
+            h3= stats.users.total || 0
+
+      .col-md-3
+        .card.text-white.bg-warning.mb-3
+          .card-body
+            h5 Tổng đơn hàng
+            h3= stats.orders.total || 0
+
+      .col-md-3
+        .card.text-white.bg-danger.mb-3
+          .card-body
+            h5 Doanh thu
+            h3 #{stats.orders.totalRevenue || 0}$
+
+    .row.mt-4
+      .col-md-6
+        .card
+          .card-header
+            h5 Doanh thu tháng
+          .card-body
+            canvas#revenueChart(
+              height="200"
+              data-revenue=JSON.stringify(revenueData || [])
+            )   
+
+      .col-md-6
+        .card
+          .card-header
+            h5 Sản phẩm bán chạy
+          .card-body
+            canvas#productChart(
+              height="200"
+              data-labels=JSON.stringify(productLabels || [])
+              data-data=JSON.stringify(productData || [])
+            )
+
+  //- // ===== SCRIPT =====
+  //- script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  //- script(src="/js/dashboard.js")
