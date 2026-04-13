@@ -115,7 +115,7 @@ module.exports.forgotPasswordPost = async (req, res) => {
 
   const subject = "Mã OTP xác minh mật khẩu";
   const html = `Mã OTP xác minh mật khẩu là: <b>${otp}</b>. Mã có hiệu lực 3 phút.`;
-  const sendMail = sendMailHelper.sendMail(email, subject, html);
+  const sendMail = await sendMailHelper.sendMail(email, subject, html);
 
   res.redirect(`/user/password/otp?email=${email}`);
 }
