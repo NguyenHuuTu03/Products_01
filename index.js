@@ -60,6 +60,11 @@ app.use(express.static(`${__dirname}/public`)); // để hiểu file public khi 
 // routes
 route(app);
 routeAdmin(app);
+app.use((req, res) => {
+  res.status(404).render("admin/pages/errors/404", {
+    pageTitle: "Trang 404"
+  });
+});
 app.listen(port, () => {
   console.log(`Hãy truy cập vào link: http://localhost:${port}`)
 })

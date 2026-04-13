@@ -1,0 +1,16 @@
+extends ../../layouts/default.pug
+
+block main
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+
+        .card.shadow.text-center.p-4
+          h1.text-danger.display-1 404
+          h4.mt-2 Không tìm thấy trang
+
+          p.text-muted.mt-2
+            | Có thể link đã bị sai hoặc nội dung không còn tồn tại.
+
+          button.btn.btn-outline-primary.mt-3(onclick="history.back()")
+            | Trở lại

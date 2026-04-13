@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const productData = safeParse(productEl.dataset.data);
 
     new Chart(productEl, {
-      type: "line",
+      type: "bar",
       data: {
         labels: productLabels,
         datasets: [{
