@@ -9,7 +9,7 @@ block main
     
     .row
       .col-12
-        .chat
+        .chat(my-id=user.id)
 
           // ===== HEADER =====
           
@@ -20,7 +20,7 @@ block main
             // ===== BODY =====
           .inner-body#chatBody
             each chat in chats
-              div(class= chat.user_id == user.id ? "inner-outgoing" : "inner-incoming")
+              div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-incoming"))
                 if(chat.user_id != user.id)
                   .inner-name #{chat.userInfo.fullName}
                 .inner-content
