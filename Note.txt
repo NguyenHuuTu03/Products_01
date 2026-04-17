@@ -112,3 +112,7 @@ biến res.locals.tên_biến_đó
 - app.use(categoryMiddleware.category); có nghĩa là app luôn sử dụng
 
 - npm i nodemailer // thư viện dùng để gửi mã otp qua email
+
+- sử dụng socketIo để làm chat có những lưu ý sau: 
+muốn gửi đi được thì sử dụng socket.emit("tên sự kiện tự đặt", hàm xử lý)
+muốn nhận được thì sử dụng socket.on("tên sự kiện trùng với sự kiện emit", hàm xử lý)

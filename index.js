@@ -24,8 +24,12 @@ const path = require('path');
 
 const moment = require('moment');
 
-
 const app = express();
+
+// socket.io
+const http = require('http');
+const server = http.createServer(app);
+// socket.io
 
 database.connect();
 const port = process.env.PORT;
@@ -48,6 +52,15 @@ app.use(session({
 }));
 app.use(flash());
 
+// socket.io
+const {
+  Server
+} = require("socket.io");
+const io = new Server(server);
+global._io = io // khai báo biến toàn cục sử dụng được trong tất cả các file js
+
+// socket.io
+
 // TinyMCE
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
@@ -65,6 +78,6 @@ app.use((req, res) => {
     pageTitle: "Trang 404"
   });
 });
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Hãy truy cập vào link: http://localhost:${port}`)
 })

@@ -1,0 +1,35 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box_head("Chat")
+    
+    .row
+      .col-12
+        .chat
+
+          // ===== HEADER =====
+          
+          .inner-head
+            .inner-avatar NY
+            .inner-name Người yêu
+
+            // ===== BODY =====
+          .inner-body#chatBody
+            each chat in chats
+              div(class= chat.user_id == user.id ? "inner-outgoing" : "inner-incoming")
+                if(chat.user_id != user.id)
+                  .inner-name #{chat.userInfo.fullName}
+                .inner-content
+                  | #{chat.content}
+
+            // ===== FOOTER =====
+          .inner-foot
+            form(class="inner-form" action) 
+              input#messageInput(type="text" placeholder="Nhập tin nhắn...")
+              button(type="submit")
+                i(class="fa-regular fa-paper-plane")
+      

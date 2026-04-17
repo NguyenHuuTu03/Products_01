@@ -6,7 +6,6 @@ html
     link(rel="stylesheet", href="/admin/css/style.css")
     //- trong pug thì muốn đi vào đường dẫn public thì chỉ cần / là sẽ đi vào public
   body 
-    if(role.permission.length > 0)
       include ../partials/header.pug
 
       .body
@@ -21,5 +20,3 @@ html
       script(src="/tinymce/tinymce.min.js")
       script(src="/admin/js/tinymce-config.js") 
       script(src="https://cdn.jsdelivr.net/npm/chart.js")
-    else 
-      h1 Bạn không có quyền truy cập

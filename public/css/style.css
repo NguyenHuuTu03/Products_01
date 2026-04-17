@@ -436,3 +436,164 @@ a {
   color: green;
   font-weight: 500;
 }
+
+/* chat */
+.chat {
+  max-width: 750px;
+  margin: 30px auto;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e4e6eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* HEADER */
+.inner-head {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #1877f2, #3b82f6);
+  color: #fff;
+}
+
+.inner-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: white;
+  color: #1877f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 12px;
+  font-size: 14px;
+}
+
+.inner-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* BODY */
+.inner-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+}
+
+/* Scroll đẹp hơn */
+.inner-body::-webkit-scrollbar {
+  width: 6px;
+}
+.inner-body::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+/* MESSAGE */
+.inner-incoming,
+.inner-outgoing {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tin nhắn trái */
+.inner-incoming {
+  align-self: flex-start;
+}
+
+.inner-incoming .inner-content {
+  background: #fff;
+  border-radius: 18px 18px 18px 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Tin nhắn phải */
+.inner-outgoing {
+  align-self: flex-end;
+}
+
+.inner-outgoing .inner-content {
+  background: linear-gradient(135deg, #1877f2, #2563eb);
+  color: white;
+  border-radius: 18px 18px 4px 18px;
+  padding: 10px 14px;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tên nhỏ */
+.inner-incoming .inner-name {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+/* FOOTER */
+.inner-foot {
+  display: flex;
+  align-items: center; /* QUAN TRỌNG */
+  padding: 10px 12px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  gap: 10px;
+}
+
+.inner-form {
+  display: flex;
+  align-items: center; /* căn giữa theo chiều dọc */
+  width: 100%;
+  gap: 10px;
+}
+/* INPUT */
+.inner-foot input {
+  flex: 1;
+  border: none;
+  background: #f0f2f5;
+  border-radius: 25px;
+  padding: 10px 15px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.inner-foot input:focus {
+  background: #e4e6eb;
+}
+
+/* BUTTON */
+.inner-foot button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #1877f2, #2563eb);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.inner-foot button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* end chat */
+
+.inner-title {
+  color: green;
+}
