@@ -5,7 +5,7 @@
   background: #fff;
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 999999;
 }
 .header .inner-logo img {
   max-width: 150px; /* chỉnh theo ý */
@@ -597,3 +597,14 @@ a {
 .inner-title {
   color: green;
 }
+
+/* emoji picker */
+.tooltip {
+  visibility: hidden;
+}
+
+.tooltip.shown {
+  visibility: visible;
+  opacity: 1;
+}
+/* end emoji picker */

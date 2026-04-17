@@ -113,6 +113,16 @@ biến res.locals.tên_biến_đó
 
 - npm i nodemailer // thư viện dùng để gửi mã otp qua email
 
+- npm i socket.io // thư viện cài đặt socket. Lên doc để xem cách dùng
+
 - sử dụng socketIo để làm chat có những lưu ý sau: 
 muốn gửi đi được thì sử dụng socket.emit("tên sự kiện tự đặt", hàm xử lý)
 muốn nhận được thì sử dụng socket.on("tên sự kiện trùng với sự kiện emit", hàm xử lý)
+trong socket thì khi phản hổi dữ liệu từ server về client thì có thể sử dụng 3 cách: socket(client phát tín hiệu), io(mọi client),
+socket.broadcast.emit(tất cả các client trừ client phát tín hiệu)
+
+- sử dụng global.ten_bien = io // tạo một biến toàn cục sử dụng được trong tất cả các file js
+
+- io.once // client chỉ connect một lần(khi load lại trang thì nó sẽ k thực hiện lại để tạo socket mới nữa tránh bị chạy lặp nhiều lần trong 1 sự kiện)
+
+- body.scrollTop = body.scrollHeight; // cuộn xuống sao cho phần cuối nội dung vừa chạm đáy khung nhìn
