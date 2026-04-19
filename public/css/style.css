@@ -541,6 +541,50 @@ a {
   margin-left: 5px;
 }
 
+/* ===== IMAGE CHAT ===== */
+.inner-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  max-width: 100%;
+}
+
+/* ảnh */
+.inner-images img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover */
+.inner-images img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 1 ảnh */
+.inner-images img:only-child {
+  width: 200px;
+  height: auto;
+}
+
+/* 2 ảnh */
+.inner-images img:nth-child(1):nth-last-child(2),
+.inner-images img:nth-child(2):nth-last-child(1) {
+  width: calc(50% - 3px);
+  height: 120px;
+}
+
+/* 3-4 ảnh */
+.inner-images img:nth-child(n + 1):nth-last-child(n + 3) {
+  width: calc(33.33% - 4px);
+  height: 100px;
+}
+
 /* FOOTER */
 .inner-foot {
   display: flex;
@@ -591,6 +635,22 @@ a {
 .inner-foot button:hover {
   transform: scale(1.08);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.chat .inner-preview-images .label-container {
+  display: none;
+}
+.chat .inner-preview-images .input-visible {
+  display: none;
+}
+.chat .inner-preview-images .image-preview {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+}
+.chat .inner-preview-images .image-preview-item {
+  width: 90px;
+  background-size: contain;
 }
 /* end chat */
 

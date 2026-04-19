@@ -23,25 +23,23 @@ block main
               div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-incoming"))
                 if(chat.user_id != user.id)
                   .inner-name #{chat.userInfo.fullName}
-                .inner-content
-                  | #{chat.content}
+                if(chat.content)
+                  .inner-content
+                    | #{chat.content}
+                if(chat.images)
+                  .inner-images
+                    each image in chat.images
+                      img(src=image)
             div(class="inner-list-typing")
-            //-   div(class="box-typing")
-            //-     div(class="inner-name") Le Van A
-            //-     div(class="inner-dots")
-            //-       span
-            //-       span
-            //-       span
-            //-   div(class="box-typing")
-            //-     div(class="inner-name") Le Van B
-            //-     div(class="inner-dots")
-            //-       span
-            //-       span
-            //-       span
+          div.inner-preview-images
+            div(class="custom-file-container" data-upload-id="upload-images")
             // ===== FOOTER =====
           .inner-foot
-            form(class="inner-form" action) 
+            form(class="inner-form" action="") 
               input#messageInput(type="text" placeholder="Nhập tin nhắn...")
+              label(for="file-upload-with-preview-upload-images")
+                span(class="button-images btn btn-light mx-2")
+                  i(class="fa-regular fa-image")
               span(class="button-icon btn btn-light mx-2")
                 i(class="fa-regular fa-face-frown")
               button
