@@ -135,3 +135,5 @@ import thư viện đó (import {FileUploadWithPreview} from 'https://unpkg.com/
 });
 - upload.resetPreviewPanel(); // clear toàn bộ ảnh ở ô input
 - clearTimeout(timeOut); // dùng để huỷ một TimeOut đã chạy trước đó 
+
+- thư viện viewer để preview ảnh
