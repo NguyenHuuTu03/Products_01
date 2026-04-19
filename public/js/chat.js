@@ -93,7 +93,8 @@ if (buttonIcon) {
 var timeOut;
 const showTyping = () => {
   socket.emit("CLIENT_SEND_TYPING", "show");
-  clearTimeout(timeOut);
+  clearTimeout(timeOut); // dùng để huỷ Timeout đã tạo trước đó 
+  // sau 3s nó gửi lên sever để ẩn typing đi nên khi để clear phía trước để khi trước 3s nó sẽ xoá đi Timout nếu vẫn còn nhập
   timeOut = setTimeout(() => {
     socket.emit("CLIENT_SEND_TYPING", "hidden");
   }, 3000);

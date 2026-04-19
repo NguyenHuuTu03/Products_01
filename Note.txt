@@ -126,3 +126,12 @@ socket.broadcast.emit(tất cả các client trừ client phát tín hiệu)
 - io.once // client chỉ connect một lần(khi load lại trang thì nó sẽ k thực hiện lại để tạo socket mới nữa tránh bị chạy lặp nhiều lần trong 1 sự kiện)
 
 - body.scrollTop = body.scrollHeight; // cuộn xuống sao cho phần cuối nội dung vừa chạm đáy khung nhìn
+
+- khi nhúng file-upload-with-preview thì lên doc đọc. Nhúng file css, js(type=module) và trong file sử dụng js phải 
+import thư viện đó (import {FileUploadWithPreview} from 'https://unpkg.com/file-upload-with-preview/dist/index.js';)
+- const upload = new FileUploadWithPreview('upload-images', {
+  multiple: true, // cho phép upload nhiều ảnh
+  maxFileCount: 6 // cho phép upload tối đa 6 ảnh
+});
+- upload.resetPreviewPanel(); // clear toàn bộ ảnh ở ô input
+- clearTimeout(timeOut); // dùng để huỷ một TimeOut đã chạy trước đó 
