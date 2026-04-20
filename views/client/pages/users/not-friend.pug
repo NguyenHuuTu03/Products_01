@@ -1,8 +1,11 @@
 extends ../../layouts/default.pug
 include ../../mixins/box_head.pug
 
+
 block main
   .container.mt-4
+    .row 
+      include ../../partials/list-button-user.pug
     h3.mb-4 
       +box_head("Danh sách người dùng")
 
@@ -27,4 +30,5 @@ block main
                 button.btn.btn-sm.btn-secondary.me-1(
                   btn-cancel-friend=user.id
                 ) Huỷ
-                
+block script 
+  script(src="/js/users.js") 
