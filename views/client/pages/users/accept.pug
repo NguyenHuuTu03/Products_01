@@ -1,0 +1,38 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+
+block main
+  .container.mt-4
+    .row 
+      include ../../partials/list-button-user.pug
+    h3.mb-4 
+      +box_head(pageTitle)
+
+    .row
+      each user in users
+        .col-9.mb-2
+          .box-user
+            .inner-avatar
+              img(
+                src=user.avatar ? user.avatar : "/images/avatar.png",
+                alt=user.fullName
+              )
+
+            .inner-info
+              .inner-name= user.fullName
+
+              .inner-buttons
+                button.btn.btn-sm.btn-primary.me-1(
+                  btn-accept-friend=user.id
+                ) Chấp nhận
+
+                button.btn.btn-sm.btn-secondary.me-1(
+                  btn-refuse-friend=user.id
+                ) Xoá
+
+                button.btn.btn-sm.btn-secondary.me-1(
+                  btn-deleted-friend=user.id
+                ) Đã xoá
+block script 
+  script(src="/js/users.js") 

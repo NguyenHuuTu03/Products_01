@@ -2,10 +2,10 @@ const User = require("../../models/user.model");
 
 module.exports = (res) => {
 
-  const myId = res.locals.user.id;
+
 
   _io.once("connection", (socket) => {
-
+    const myId = res.locals.user.id;
     // Chức năng gửi yêu cầu
     socket.on("CLIENT_ADD_FRIEND", async (youId) => {
 
@@ -47,7 +47,7 @@ module.exports = (res) => {
 
     // Chức năng huỷ gửi yêu cầu
     socket.on("CLIENT_CANCEL_FRIEND", async (youId) => {
-
+      const myId = res.locals.user.id;
       const exitsMyinYou = await User.findOne({
         _id: youId,
         acceptFriends: myId
@@ -83,5 +83,44 @@ module.exports = (res) => {
       }
     });
     // Hết Chức năng huỷ gửi yêu cầu
+
+    // Chức năng không chấp nhận yêu cầu
+    socket.on("CLIENT_REFUSE_FRIEND", async (youId) => {
+
+      const exitsMyinYou = await User.findOne({
+        _id: myId,
+        acceptFriends: youId
+      });
+      if (exitsMyinYou) {
+
+        // xoá id của my trong acceptFriend của you
+        await User.updateOne({
+          _id: myId
+        }, {
+          $pull: {
+            acceptFriends: youId
+          }
+        });
+
+      }
+
+      const exitsYouinMy = await User.findOne({
+        _id: youId,
+        requestFriends: myId
+      });
+      if (exitsYouinMy) {
+
+        // xoá id của you trong requestFriend của my
+        await User.updateOne({
+          _id: youId
+        }, {
+          $pull: {
+            requestFriends: myId
+          }
+        });
+
+      }
+    });
+    // Hết Chức năng không chấp nhận yêu cầu
   });
 }

@@ -744,6 +744,18 @@ a {
 .box-user.add .inner-buttons [btn-cancel-friend] {
   display: inline-block;
 }
+.box-user .inner-buttons [btn-deleted-friend] {
+  display: none;
+}
+.box-user.refuse .inner-buttons [btn-accept-friend] {
+  display: none;
+}
+.box-user.refuse .inner-buttons [btn-refuse-friend] {
+  display: none;
+}
+.box-user.refuse .inner-buttons [btn-deleted-friend] {
+  display: inline-block;
+}
 /* Card user */
 .box-user {
   display: flex;
