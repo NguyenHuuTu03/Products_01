@@ -40,6 +40,8 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   const body = document.querySelector("#chatBody");
 
   const div = document.createElement("div");
+  div.setAttribute("data-id", data.message_id);
+
   let htmlFullName = "";
   let htmlContent = "";
   let htmlImages = "";
@@ -50,7 +52,10 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     div.classList.add("inner-incoming");
   }
   if (data.content) {
-    htmlContent = `<div class="inner-content">${data.content}</div>`;
+    htmlContent = `<div class="inner-content">
+      ${data.content}
+      ${myId == data.userId ? `<i class="fa-solid fa-trash delete-btn"></i>` : ``}
+    </div>`;
   }
   if (data.images.length > 0) {
     htmlImages += `<div class="inner-images">`;
@@ -68,6 +73,16 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
   const gallery = new Viewer(div);
+
+  // CLIENT_DELETE_MESSAGE
+  const buttonDelete = div.querySelector(".delete-btn");
+  if (buttonDelete) {
+    buttonDelete.addEventListener("click", () => {
+      socket.emit("CLIENT_DELETE_MESSAGE", data.message_id);
+    });
+  }
+  // END CLIENT_DELETE_MESSAGE
+
 });
 // END SERVER_RETURN_MESSAGE
 
@@ -166,5 +181,15 @@ if (listTyping) {
 
 // Preview Images
 const bodyPreviewImage = document.querySelector("#chatBody");
-const gallery = new Viewer(bodyPreviewImage);
+const gallery = new Viewer(bodyPreviewImage); // preview tất cả các thể img
 // End Preview Images
+
+// SERVER_DELETE_MESSAGE
+const bodyChat = document.querySelector("#chatBody");
+socket.on("SERVER_DELETE_MESSAGE", (message_id) => {
+  const message = document.querySelector(`[data-id="${message_id}"]`);
+  if (message) {
+    bodyChat.removeChild(message);
+  }
+});
+// END SERVER_DELETE_MESSAGE

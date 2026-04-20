@@ -733,3 +733,102 @@ a {
 }
 /* ===== END TYPING ===== */
 /* end danh sách typing */
+
+/* button-add/cancel-friend */
+.box-user .inner-buttons [btn-cancel-friend] {
+  display: none;
+}
+.box-user.add .inner-buttons [btn-add-friend] {
+  display: none;
+}
+.box-user.add .inner-buttons [btn-cancel-friend] {
+  display: inline-block;
+}
+/* Card user */
+.box-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  border: 1px solid #eee;
+}
+
+/* Hover effect */
+.box-user:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Avatar */
+.inner-avatar img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f1f1f1;
+}
+
+/* Layout info */
+.inner-info {
+  flex: 1;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Name */
+.inner-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Buttons */
+.inner-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+/* Button custom (optional đẹp hơn bootstrap mặc định) */
+.inner-buttons .btn-primary {
+  background: #1877f2;
+  border: none;
+}
+
+.inner-buttons .btn-primary:hover {
+  background: #166fe5;
+}
+
+.inner-buttons .btn-secondary {
+  background: #e4e6eb;
+  color: #050505;
+  border: none;
+}
+
+.inner-buttons .btn-secondary:hover {
+  background: #d8dadf;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .box-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .inner-info {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .inner-buttons {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+/* end button-add/cancel-friend */

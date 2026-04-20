@@ -23,13 +23,22 @@ module.exports = (res) => {
       await chat.save();
       // trả data về client
       _io.emit("SERVER_RETURN_MESSAGE", {
+        message_id: chat.id,
         userId: userId,
         fullName: fullName,
         content: data.content,
         images: images
       });
     });
+    // CLIENT_DELETE_MESSAGE
+    socket.on("CLIENT_DELETE_MESSAGE", async (message_id) => {
+      await Chats.deleteOne({
+        _id: message_id
+      });
 
+      _io.emit("SERVER_DELETE_MESSAGE", message_id);
+    });
+    // END CLIENT_DELETE_MESSAGE
     // Typing
     socket.on("CLIENT_SEND_TYPING", (type) => {
       socket.broadcast.emit("SERVER_RETURN_TYPING", {

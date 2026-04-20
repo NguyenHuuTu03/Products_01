@@ -6,7 +6,7 @@ const authMiddleware = require("../../middlewares/client/auth.middleware");
 
 const multer = require('multer');
 const upload = multer();
-const uploadCloudMiddleware = require('../../middlewares/admin/uploadCloud.middleware');
+const uploadCloudMiddleware = require('../../middlewares/client/uploadCloud.middleware')
 
 
 

@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "active"
   },
+  requestFriends: Array, // Gửi yêu cầu kết bạn
+  acceptFriends: Array, // Lời mời kết bạn
+  listFriends: [ // Danh sách bạn bè
+    {
+      user_id: String,
+      room_chat_id: String
+    }
+  ],
   deleted: {
     type: Boolean,
     default: false // để mỗi khi thêm sản phẩm vào DB mà không có trường deleted thì nó mặc định là false
