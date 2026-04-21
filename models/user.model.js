@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
       room_chat_id: String
     }
   ],
+  statusOnline: String,
   deleted: {
     type: Boolean,
     default: false // để mỗi khi thêm sản phẩm vào DB mà không có trường deleted thì nó mặc định là false

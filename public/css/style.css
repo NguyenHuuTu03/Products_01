@@ -768,6 +768,21 @@ a {
 .box-user.accepted .inner-buttons [btn-accepted-friend] {
   display: inline-block;
 }
+.box-user {
+  position: relative;
+}
+.box-user .inner-status {
+  font-size: 12px;
+  color: rgb(123, 248, 123);
+  opacity: 0;
+}
+.box-user .inner-status[status="online"] {
+  opacity: 1;
+  position: absolute;
+  left: 44px;
+  top: 4px;
+}
+
 /* Card user */
 .box-user {
   display: flex;
