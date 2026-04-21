@@ -37,3 +37,28 @@ if (listBtnRefuseFriend.length > 0) {
   });
 }
 // Hết Chức năng không chấp nhận 
+
+// Chức năng chấp nhận 
+const listBtnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
+if (listBtnAcceptFriend.length > 0) {
+  listBtnAcceptFriend.forEach(button => {
+    button.addEventListener("click", () => {
+      const youId = button.getAttribute("btn-accept-friend");
+      button.closest(".box-user").classList.add("accepted");
+      socket.emit("CLIENT_ACCEPT_FRIEND", youId);
+    });
+  });
+}
+// Hết Chức năng  chấp nhận 
+
+// SERVER_RETURN_LENGTH_ACCEPT_FRIEND
+const badgeLengthAccept = document.querySelector("[badge-length-accept]");
+if (badgeLengthAccept) {
+  socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data) => {
+    const youId = badgeLengthAccept.getAttribute("badge-length-accept");
+    if (youId === data.userId) {
+      badgeLengthAccept.innerHTML = data.lengthAcceptFriend;
+    }
+  });
+}
+// END SERVER_RETURN_LENGTH_ACCEPT_FRIEND

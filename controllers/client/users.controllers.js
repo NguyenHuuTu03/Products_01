@@ -14,6 +14,10 @@ module.exports.notFriend = async (req, res) => {
   });
   const requestFriend = myUser.requestFriends;
   const acceptFriend = myUser.acceptFriends;
+  const listFriend = [];
+  for (const friend of myUser.listFriends) {
+    listFriend.push(friend.user_id);
+  }
 
 
   const users = await User.find({
@@ -31,6 +35,11 @@ module.exports.notFriend = async (req, res) => {
         _id: {
           $nin: acceptFriend // k có trong mảng acceptFriend
         }
+      },
+      {
+        _id: {
+          $nin: listFriend // k có trong mảng listFriend
+        }
       }
     ],
     status: "active",
@@ -38,7 +47,8 @@ module.exports.notFriend = async (req, res) => {
   }).select("id avatar fullName");
   res.render("client/pages/users/not-friend", {
     pageTitle: "Danh sách người dùng",
-    users: users
+    users: users,
+    lengthAcceptFriend: myUser.acceptFriends.length
   });
 }
 // [GET] /users/request
@@ -63,7 +73,8 @@ module.exports.request = async (req, res) => {
   }).select("id avatar fullName");
   res.render("client/pages/users/request", {
     pageTitle: "Lời mời đã gửi",
-    users: users
+    users: users,
+    lengthAcceptFriend: myUser.acceptFriends.length
   });
 }
 // [GET] /users/accept
@@ -88,6 +99,36 @@ module.exports.accept = async (req, res) => {
   }).select("id avatar fullName");
   res.render("client/pages/users/accept", {
     pageTitle: "Lời mời kết bạn",
-    users: users
+    users: users,
+    lengthAcceptFriend: myUser.acceptFriends.length
+  });
+}
+// [GET] /users/friends
+module.exports.friends = async (req, res) => {
+
+  //   // Socket
+  usersSocket(res)
+  //   // End Socket
+
+  const userId = res.locals.user.id;
+  const myUser = await User.findOne({
+    _id: userId
+  });
+  let listFriend = [];
+  for (const friend of myUser.listFriends) {
+    listFriend.push(friend.user_id);
+  }
+
+  const users = await User.find({
+    _id: {
+      $in: listFriend
+    },
+    status: "active",
+    deleted: false
+  }).select("id avatar fullName");
+  res.render("client/pages/users/friends", {
+    pageTitle: "Danh sách bạn bè",
+    users: users,
+    lengthAcceptFriend: myUser.acceptFriends.length
   });
 }

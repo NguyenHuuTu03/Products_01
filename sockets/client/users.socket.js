@@ -42,6 +42,16 @@ module.exports = (res) => {
         });
 
       }
+
+      // Lấy số lượng lời mời trong acceptFriend của You
+      const youUser = await User.findOne({
+        _id: youId
+      });
+      const lengthAcceptFriend = youUser.acceptFriends.length;
+      socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+        userId: youId,
+        lengthAcceptFriend: lengthAcceptFriend
+      });
     });
     // Hết Chức năng gửi yêu cầu
 
@@ -81,6 +91,16 @@ module.exports = (res) => {
         });
 
       }
+
+      // Lấy số lượng lời mời trong acceptFriend của You
+      const youUser = await User.findOne({
+        _id: youId
+      });
+      const lengthAcceptFriend = youUser.acceptFriends.length;
+      socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+        userId: youId,
+        lengthAcceptFriend: lengthAcceptFriend
+      });
     });
     // Hết Chức năng huỷ gửi yêu cầu
 
@@ -122,5 +142,56 @@ module.exports = (res) => {
       }
     });
     // Hết Chức năng không chấp nhận yêu cầu
+
+    // Chức năng chấp nhận yêu cầu
+    socket.on("CLIENT_ACCEPT_FRIEND", async (youId) => {
+
+      const exitsMyinYou = await User.findOne({
+        _id: myId,
+        acceptFriends: youId
+      });
+      if (exitsMyinYou) {
+
+        // xoá id của my trong acceptFriend của you
+        await User.updateOne({
+          _id: myId
+        }, {
+          $push: {
+            listFriends: {
+              user_id: youId,
+              chat_room_id: ""
+            }
+          },
+          $pull: {
+            acceptFriends: youId
+          }
+        });
+
+      }
+
+      const exitsYouinMy = await User.findOne({
+        _id: youId,
+        requestFriends: myId
+      });
+      if (exitsYouinMy) {
+
+        // xoá id của you trong requestFriend của my
+        await User.updateOne({
+          _id: youId
+        }, {
+          $push: {
+            listFriends: {
+              user_id: myId,
+              chat_room_id: ""
+            }
+          },
+          $pull: {
+            requestFriends: myId
+          }
+        });
+
+      }
+    });
+    // Hết Chức năng chấp nhận yêu cầu
   });
 }
