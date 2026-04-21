@@ -12,6 +12,28 @@ if (listBtnAddFriend.length > 0) {
 }
 // Hết Chức năng gửi yêu cầu
 
+// hàm xử lý nút không chấp nhận yêu cầu
+const buttonRefuseFriend = (button) => {
+  button.addEventListener("click", () => {
+    const youId = button.getAttribute("btn-refuse-friend");
+    button.closest(".box-user").classList.add("refuse");
+    socket.emit("CLIENT_REFUSE_FRIEND", youId);
+  });
+}
+// Hết hàm xử lý nút không chấp nhận yêu cầu
+
+
+// hàm xử lý nút chấp nhận yêu cầu
+const buttonAcceptFriend = (button) => {
+  button.addEventListener("click", () => {
+    const youId = button.getAttribute("btn-accept-friend");
+    button.closest(".box-user").classList.add("accepted");
+    socket.emit("CLIENT_ACCEPT_FRIEND", youId);
+  });
+}
+// Hết hàm xử lý nút chấp nhận yêu cầu
+
+
 // Chức năng huỷ gửi yêu cầu
 const listBtnCancelFriend = document.querySelectorAll("[btn-cancel-friend]");
 if (listBtnCancelFriend.length > 0) {
@@ -29,11 +51,7 @@ if (listBtnCancelFriend.length > 0) {
 const listBtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
 if (listBtnRefuseFriend.length > 0) {
   listBtnRefuseFriend.forEach(button => {
-    button.addEventListener("click", () => {
-      const youId = button.getAttribute("btn-refuse-friend");
-      button.closest(".box-user").classList.add("refuse");
-      socket.emit("CLIENT_REFUSE_FRIEND", youId);
-    });
+    buttonRefuseFriend(button);
   });
 }
 // Hết Chức năng không chấp nhận 
@@ -42,11 +60,7 @@ if (listBtnRefuseFriend.length > 0) {
 const listBtnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
 if (listBtnAcceptFriend.length > 0) {
   listBtnAcceptFriend.forEach(button => {
-    button.addEventListener("click", () => {
-      const youId = button.getAttribute("btn-accept-friend");
-      button.closest(".box-user").classList.add("accepted");
-      socket.emit("CLIENT_ACCEPT_FRIEND", youId);
-    });
+    buttonAcceptFriend(button);
   });
 }
 // Hết Chức năng  chấp nhận 
@@ -62,3 +76,49 @@ if (badgeLengthAccept) {
   });
 }
 // END SERVER_RETURN_LENGTH_ACCEPT_FRIEND
+
+// SERVER_RETURN_INFO_ACCEPT_FRIEND
+const boxInfoUser = document.querySelector("[box-info-user]");
+if (boxInfoUser) {
+  socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+    const youId = boxInfoUser.getAttribute("box-info-user");
+    if (youId === data.userId) {
+
+      // vẽ giao diện 
+      const div = document.createElement("div");
+      div.classList.add("col-9 mb-2");
+      div.innerHTML = `
+        <div class="box-user">
+          <div class="inner-avatar">
+            <img src=${data.infoUser.avatar ? data.infoUser.avatar : "/images/avatar.png"},
+                alt=${data.infoUser.fullName}>
+          </div>
+          <div class="inner-info">
+            <div class="inner-name">${data.infoUser.fullName}</div>
+            <div class="inner-buttons">
+              <button class="btn btn-sm btn-primary me-1" btn-add-friend=${data.infoUser._id}>
+                Kết bạn
+              </button>
+              <button class="btn btn-sm btn-secondary me-1" btn-cancel-friend=${data.infoUser._id}>
+                Huỷ
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      boxInfoUser.appendChild(div);
+      // hết vẽ giao diện 
+
+      // xử lý nút không chấp nhận
+      const BtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
+      buttonRefuseFriend(BtnRefuseFriend);
+      // hết xử lý nút không chấp nhận
+
+      // xử lý nút chấp nhận
+      const BtnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
+      buttonAcceptFriend(BtnAcceptFriend);
+      // hết xử lý nút chấp nhận
+    }
+  });
+}
+// END SERVER_RETURN_INFO_ACCEPT_FRIEND
