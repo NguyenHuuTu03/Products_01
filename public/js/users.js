@@ -77,6 +77,24 @@ if (badgeLengthAccept) {
 }
 // END SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 
+// SERVER_RETURN_LENGTH_REQUEST_FRIEND
+const badgeLengthRequest = document.querySelector("[badge-length-request]");
+if (badgeLengthRequest) {
+  socket.on("SERVER_RETURN_LENGTH_REQUEST_FRIEND", (data) => {
+    badgeLengthRequest.innerHTML = data.lengthRequestFriend;
+  })
+}
+// End SERVER_RETURN_LENGTH_REQUEST_FRIEND
+
+// SERVER_RETURN_LENGTH_FRIEND
+const badgeLengthFriend = document.querySelector("[badge-length-friend]");
+if (badgeLengthFriend) {
+  socket.on("SERVER_RETURN_LENGTH_FRIEND", (data) => {
+    badgeLengthFriend.innerHTML = data.lengthMyFriend;
+  });
+}
+// End SERVER_RETURN_LENGTH_FRIEND
+
 // SERVER_RETURN_INFO_ACCEPT_FRIEND
 socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
 

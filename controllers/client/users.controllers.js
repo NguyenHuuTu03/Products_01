@@ -48,7 +48,11 @@ module.exports.notFriend = async (req, res) => {
   res.render("client/pages/users/not-friend", {
     pageTitle: "Danh sách người dùng",
     users: users,
-    lengthAcceptFriend: myUser.acceptFriends.length
+    countFriend: {
+      lengthAcceptFriend: myUser.acceptFriends.length,
+      lengthRequestFriend: myUser.requestFriends.length,
+      lengthFriend: myUser.listFriends.length
+    }
   });
 }
 // [GET] /users/request
@@ -74,7 +78,11 @@ module.exports.request = async (req, res) => {
   res.render("client/pages/users/request", {
     pageTitle: "Lời mời đã gửi",
     users: users,
-    lengthAcceptFriend: myUser.acceptFriends.length
+    countFriend: {
+      lengthAcceptFriend: myUser.acceptFriends.length,
+      lengthRequestFriend: myUser.requestFriends.length,
+      lengthFriend: myUser.listFriends.length
+    }
   });
 }
 // [GET] /users/accept
@@ -100,7 +108,11 @@ module.exports.accept = async (req, res) => {
   res.render("client/pages/users/accept", {
     pageTitle: "Lời mời kết bạn",
     users: users,
-    lengthAcceptFriend: myUser.acceptFriends.length
+    countFriend: {
+      lengthAcceptFriend: myUser.acceptFriends.length,
+      lengthRequestFriend: myUser.requestFriends.length,
+      lengthFriend: myUser.listFriends.length
+    }
   });
 }
 // [GET] /users/friends
@@ -129,6 +141,10 @@ module.exports.friends = async (req, res) => {
   res.render("client/pages/users/friends", {
     pageTitle: "Danh sách bạn bè",
     users: users,
-    lengthAcceptFriend: myUser.acceptFriends.length
+    countFriend: {
+      lengthAcceptFriend: myUser.acceptFriends.length,
+      lengthRequestFriend: myUser.requestFriends.length,
+      lengthFriend: myUser.listFriends.length
+    }
   });
 }

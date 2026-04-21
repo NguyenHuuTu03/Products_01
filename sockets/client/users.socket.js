@@ -56,12 +56,17 @@ module.exports = (res) => {
       // Lấy thông tin my user để hiển thị trong you
       const myUser = await User.findOne({
         _id: myId
-      }).select("id avatar fullName");
+      }).select("id avatar fullName requestFriends");
       socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
         userId: youId,
         infoUser: myUser
       });
 
+      // lấy số lượng lời mời đã gửi trong requestFriend của My
+      const lengthRequestFriend = myUser.requestFriends.length;
+      socket.emit("SERVER_RETURN_LENGTH_REQUEST_FRIEND", {
+        lengthRequestFriend: lengthRequestFriend
+      });
     });
     // Hết Chức năng gửi yêu cầu
 
@@ -110,6 +115,15 @@ module.exports = (res) => {
       socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
         userId: youId,
         lengthAcceptFriend: lengthAcceptFriend
+      });
+
+      // lấy số lượng lời mời đã gửi trong requestFriend của My
+      const myUser = await User.findOne({
+        _id: myId
+      });
+      const lengthRequestFriend = myUser.requestFriends.length;
+      socket.emit("SERVER_RETURN_LENGTH_REQUEST_FRIEND", {
+        lengthRequestFriend: lengthRequestFriend
       });
 
       // lấy id của user my 
@@ -206,6 +220,13 @@ module.exports = (res) => {
           }
         });
 
+        // lấy số lượng listFriend trong My và You
+        const myUser = await User.findOne({
+          _id: myId
+        });
+        _io.emit("SERVER_RETURN_LENGTH_FRIEND", {
+          lengthMyFriend: myUser.listFriends.length
+        });
       }
     });
     // Hết Chức năng chấp nhận yêu cầu
