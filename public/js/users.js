@@ -78,9 +78,11 @@ if (badgeLengthAccept) {
 // END SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 
 // SERVER_RETURN_INFO_ACCEPT_FRIEND
-const boxInfoUser = document.querySelector("[data-user-accept]");
-if (boxInfoUser) {
-  socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+
+  // Trang lời mời kết bạn
+  const boxInfoUser = document.querySelector("[data-user-accept]");
+  if (boxInfoUser) {
     const youId = boxInfoUser.getAttribute("data-user-accept");
     if (youId === data.userId) {
 
@@ -120,8 +122,21 @@ if (boxInfoUser) {
       buttonAcceptFriend(BtnAcceptFriend);
       // hết xử lý nút chấp nhận
     }
-  });
-}
+  }
+
+  // Trang danh sách người dùng
+  const dataUserNotFriend = document.querySelector("[data-user-notFriend]");
+  if (dataUserNotFriend) {
+    const youId = dataUserNotFriend.getAttribute("data-user-notFriend");
+    if (youId === data.userId) {
+      const boxUserRemove = dataUserNotFriend.querySelector(`[user-id="${data.infoUser._id}"]`);
+      if (boxUserRemove) {
+        dataUserNotFriend.removeChild(boxUserRemove);
+      }
+    }
+  }
+});
+
 // END SERVER_RETURN_INFO_ACCEPT_FRIEND
 
 // SERVER_RETURN_USER_ID_CANCEL_FRIEND
