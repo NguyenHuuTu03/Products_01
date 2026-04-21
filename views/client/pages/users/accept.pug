@@ -9,9 +9,9 @@ block main
     h3.mb-4 
       +box_head(pageTitle)
 
-    .row(box-info-user=user.id)
+    .row(data-user-accept=user.id)
       each user in users
-        .col-9.mb-2
+        .col-9.mb-2(user-id=user.id)
           .box-user
             .inner-avatar
               img(

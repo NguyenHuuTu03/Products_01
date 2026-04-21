@@ -78,15 +78,16 @@ if (badgeLengthAccept) {
 // END SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 
 // SERVER_RETURN_INFO_ACCEPT_FRIEND
-const boxInfoUser = document.querySelector("[box-info-user]");
+const boxInfoUser = document.querySelector("[data-user-accept]");
 if (boxInfoUser) {
   socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
-    const youId = boxInfoUser.getAttribute("box-info-user");
+    const youId = boxInfoUser.getAttribute("data-user-accept");
     if (youId === data.userId) {
 
       // vẽ giao diện 
       const div = document.createElement("div");
-      div.classList.add("col-9 mb-2");
+      div.classList.add("col-9", "mb-2");
+      div.setAttribute("user-id", data.infoUser._id);
       div.innerHTML = `
         <div class="box-user">
           <div class="inner-avatar">
@@ -96,11 +97,11 @@ if (boxInfoUser) {
           <div class="inner-info">
             <div class="inner-name">${data.infoUser.fullName}</div>
             <div class="inner-buttons">
-              <button class="btn btn-sm btn-primary me-1" btn-add-friend=${data.infoUser._id}>
-                Kết bạn
+              <button class="btn btn-sm btn-primary me-1" btn-accept-friend="${data.infoUser._id}">
+                Chấp nhận
               </button>
-              <button class="btn btn-sm btn-secondary me-1" btn-cancel-friend=${data.infoUser._id}>
-                Huỷ
+              <button class="btn btn-sm btn-secondary me-1" btn-refuse-friend="${data.infoUser._id}">
+                Xoá
               </button>
             </div>
           </div>
@@ -110,15 +111,29 @@ if (boxInfoUser) {
       // hết vẽ giao diện 
 
       // xử lý nút không chấp nhận
-      const BtnRefuseFriend = document.querySelectorAll("[btn-refuse-friend]");
+      const BtnRefuseFriend = div.querySelector("[btn-refuse-friend]");
       buttonRefuseFriend(BtnRefuseFriend);
       // hết xử lý nút không chấp nhận
 
       // xử lý nút chấp nhận
-      const BtnAcceptFriend = document.querySelectorAll("[btn-accept-friend]");
+      const BtnAcceptFriend = div.querySelector("[btn-accept-friend]");
       buttonAcceptFriend(BtnAcceptFriend);
       // hết xử lý nút chấp nhận
     }
   });
 }
 // END SERVER_RETURN_INFO_ACCEPT_FRIEND
+
+// SERVER_RETURN_USER_ID_CANCEL_FRIEND
+socket.on("SERVER_RETURN_USER_ID_CANCEL_FRIEND", (data) => {
+  const boxUserRemove = document.querySelector(`[user-id="${data.myId}"]`);
+  if (boxUserRemove) {
+    const dataUserAccept = document.querySelector("[data-user-accept]");
+    const youId = dataUserAccept.getAttribute("data-user-accept");
+    if (youId === data.youId) {
+      dataUserAccept.removeChild(boxUserRemove);
+    }
+  }
+
+});
+// End SERVER_RETURN_USER_ID_CANCEL_FRIEND

@@ -111,6 +111,12 @@ module.exports = (res) => {
         userId: youId,
         lengthAcceptFriend: lengthAcceptFriend
       });
+
+      // lấy id của user my 
+      socket.broadcast.emit("SERVER_RETURN_USER_ID_CANCEL_FRIEND", {
+        myId: myId,
+        youId: youId
+      });
     });
     // Hết Chức năng huỷ gửi yêu cầu
 
