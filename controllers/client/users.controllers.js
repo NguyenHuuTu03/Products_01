@@ -5,7 +5,7 @@ const usersSocket = require("../../sockets/client/users.socket");
 module.exports.notFriend = async (req, res) => {
 
   // Socket
-  usersSocket(res)
+  usersSocket(req, res)
   // End Socket
 
   const userId = res.locals.user.id;
@@ -59,7 +59,7 @@ module.exports.notFriend = async (req, res) => {
 module.exports.request = async (req, res) => {
 
   //   // Socket
-  usersSocket(res)
+  usersSocket(req, res)
   //   // End Socket
 
   const userId = res.locals.user.id;
@@ -89,7 +89,7 @@ module.exports.request = async (req, res) => {
 module.exports.accept = async (req, res) => {
 
   //   // Socket
-  usersSocket(res)
+  usersSocket(req, res)
   //   // End Socket
 
   const userId = res.locals.user.id;
@@ -119,13 +119,14 @@ module.exports.accept = async (req, res) => {
 module.exports.friends = async (req, res) => {
 
   //   // Socket
-  usersSocket(res)
+  usersSocket(req, res)
   //   // End Socket
 
   const userId = res.locals.user.id;
   const myUser = await User.findOne({
     _id: userId
   });
+  const friendList = myUser.listFriends;
   let listFriend = [];
   for (const friend of myUser.listFriends) {
     listFriend.push(friend.user_id);
@@ -138,6 +139,13 @@ module.exports.friends = async (req, res) => {
     status: "active",
     deleted: false
   }).select("id avatar fullName statusOnline");
+
+  // lấy room_chat_id
+  for (const user of users) {
+    const infoFriend = friendList.find(friend => friend.user_id == user.id);
+    user.infoFriend = infoFriend;
+  }
+
   res.render("client/pages/users/friends", {
     pageTitle: "Danh sách bạn bè",
     users: users,

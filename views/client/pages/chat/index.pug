@@ -17,8 +17,9 @@ block main
           // ===== HEADER =====
           
           .inner-head
-            .inner-avatar NY
-            .inner-name Người yêu
+            .inner-avatar 
+              img(src=`${youUser.avatar? youUser.avatar : "/images/avatar.png"}`, alt=youUser.avatar)
+            .inner-name #{youUser.fullName}
 
             // ===== BODY =====
           .inner-body#chatBody

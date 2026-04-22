@@ -1,11 +1,13 @@
 const User = require("../../models/user.model");
+const RoomChat = require("../../models/room-chat.model");
 
-module.exports = (res) => {
+module.exports = (req, res) => {
 
 
 
   _io.once("connection", (socket) => {
     const myId = res.locals.user.id;
+    const roomChatId = req.params.roomChatId;
     // Chức năng gửi yêu cầu
     socket.on("CLIENT_ADD_FRIEND", async (youId) => {
 
@@ -180,6 +182,28 @@ module.exports = (res) => {
         _id: myId,
         acceptFriends: youId
       });
+
+      const exitsYouinMy = await User.findOne({
+        _id: youId,
+        requestFriends: myId
+      });
+      const room = {
+        typeRoom: "friend",
+        users: [{
+            user_id: myId,
+            role: "Super Admin"
+          },
+          {
+            user_id: youId,
+            role: "Super Admin"
+          }
+        ]
+      }
+      let roomChat;
+      if (exitsMyinYou && exitsYouinMy) {
+        roomChat = new RoomChat(room);
+        await roomChat.save();
+      }
       if (exitsMyinYou) {
 
         // xoá id của my trong acceptFriend của you
@@ -189,7 +213,7 @@ module.exports = (res) => {
           $push: {
             listFriends: {
               user_id: youId,
-              chat_room_id: ""
+              room_chat_id: roomChat.id
             }
           },
           $pull: {
@@ -199,10 +223,7 @@ module.exports = (res) => {
 
       }
 
-      const exitsYouinMy = await User.findOne({
-        _id: youId,
-        requestFriends: myId
-      });
+
       if (exitsYouinMy) {
 
         // xoá id của you trong requestFriend của my
@@ -212,7 +233,7 @@ module.exports = (res) => {
           $push: {
             listFriends: {
               user_id: myId,
-              chat_room_id: ""
+              room_chat_id: roomChat.id
             }
           },
           $pull: {
