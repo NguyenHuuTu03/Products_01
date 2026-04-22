@@ -9,10 +9,10 @@ block main
     h3.mb-4 
       +box_head(pageTitle)
 
-    .row
+    .row(data-user-friend=user.id)
       each user in users
         .col-9.mb-2
-          .box-user.add
+          .box-user.add(user-id=user.id)
             .inner-avatar
               img(
                 src=user.avatar ? user.avatar : "/images/avatar.png",
