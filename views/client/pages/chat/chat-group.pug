@@ -1,0 +1,55 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.my-3
+
+    include ../../partials/list-button-user.pug
+
+    .row
+      .col-12
+        +box_head("Chat")
+    
+    .row
+      .col-12
+        .chat(my-id=user.id)
+
+          // ===== HEADER =====
+          
+          .inner-head
+            .inner-avatar 
+              img(src=`${youUser.avatar? youUser.avatar : "/images/avatar.png"}`, alt=youUser.avatar)
+            .inner-name #{youUser.fullName}
+
+            // ===== BODY =====
+          .inner-body#chatBody
+            each chat in chats
+              div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-incoming"))
+                if(chat.user_id != user.id)
+                  .inner-name #{chat.userInfo.fullName}
+                if(chat.content)
+                  .inner-content
+                    | #{chat.content}
+                if(chat.images)
+                  .inner-images
+                    each image in chat.images
+                      img(src=image)
+            div(class="inner-list-typing")
+          div.inner-preview-images
+            div(class="custom-file-container" data-upload-id="upload-images")
+            // ===== FOOTER =====
+          .inner-foot
+            form(class="inner-form" action="") 
+              input#messageInput(type="text" placeholder="Nhập tin nhắn...")
+              label(for="file-upload-with-preview-upload-images")
+                span(class="button-images btn btn-light mx-2")
+                  i(class="fa-regular fa-image")
+              span(class="button-icon btn btn-light mx-2")
+                i(class="fa-regular fa-face-frown")
+              button
+                i(class="fa-regular fa-paper-plane")
+  div(class="tooltip" role="tooltip")
+    emoji-picker(class="light")
+  
+block script 
+  script(type="module" src="/js/chat.js")

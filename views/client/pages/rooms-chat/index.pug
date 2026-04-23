@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box_head(pageTitle)
+
+    .row.mb-3
+      .col-12
+        a(
+          href="/rooms-chat/create"
+          class="btn btn-sm btn-success mr-1"
+        ) Tạo phòng chat
+    if(rooms && rooms.length > 0)
+      .row
+        each room in rooms
+          .col-9.mb-2
+            .box-user.add
+              .inner-avatar
+                img(
+                  src=room.avatar ? room.avatar : "/images/avatar.png",
+                  alt=room.title
+                )
+
+              .inner-info
+                .inner-name= room.title
+
+                .inner-buttons
+                  a.btn.btn-sm.btn-primary.me-1(
+                    href=`/chat/chat-group/${room.id}`
+                  ) Nhắn tin
+
+                //-   button.btn.btn-sm.btn-secondary.me-1(
+                //-     btn-unfriend-friend=user.id
+                //-   ) Xoá kết bạn
+                //- .inner-status(status=user.statusOnline)
+                //-   i(class="fa-solid fa-circle")
+    else
+      .col-12
+        p.text-center.text-muted Không có phòng chat nào

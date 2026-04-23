@@ -1,0 +1,65 @@
+extends ../../layouts/default.pug
+include ../../mixins/box_head.pug
+
+block main
+  .container.my-3
+    .row
+      .col-12
+        +box_head(pageTitle)
+
+    .row
+      .col-md-6.offset-md-3
+        form(
+          action="/rooms-chat/create"
+          method="POST"
+          enctype="multipart/form-data"
+          class="border p-3 rounded"
+        )
+
+          // ===== TÊN PHÒNG =====
+          .form-group.mb-3
+            label(for="nameRoomChat") Tên phòng
+            input.form-control(
+              type="text"
+              name="nameRoomChat"
+              id="nameRoomChat"
+              placeholder="Nhập tên phòng..."
+              required
+            )
+
+          // ===== AVATAR =====
+          .form-group.mb-3
+            label Avatar phòng
+            input(
+              type="file"
+              class="form-control-file d-block"
+              style="margin-bottom:15px"
+              id="avatar"
+              name="avatar"
+              accept="image/*" 
+              upload-image-input
+            )
+          .mb-3.text-center(upload-image)
+            img(
+              src="/images/avatar.png"
+              alt="avatar"
+              width="100"
+              height="100"
+              style="border-radius: 50%; object-fit: cover;"
+              upload-image-preview
+            )
+
+          // ===== DANH SÁCH BẠN BÈ (FIX CỨNG) =====
+          .form-group.mb-3
+            label Chọn bạn bè
+            .list-friends(style="max-height:200px; overflow-y:auto; border:1px solid #ddd; padding:10px; border-radius:5px;")
+              each friend in listFriend
+                .form-check
+                  input.form-check-input(type="checkbox" name="members" value=`${friend.user_id}` id=`user-${friend.user_id}`)
+                  label.form-check-label(for=`user-${friend.user_id}`) #{friend.infoFriend.fullName}
+
+
+          // ===== NÚT =====
+          .form-group.text-right
+            button.btn.btn-success.me-2(type="submit") Tạo phòng
+            a.btn.btn-secondary(href="/rooms-chat") Quay lại
