@@ -8,7 +8,8 @@
 - npm i dotenv // để sử dụng tạo một file .env để lưu thông tin bảo mật
 muốn sử dụng được ta phải nhúng vào file index.js --- require("dotenv").config();---
 
-- npm i --save-dev nodemon // để chạy nodejs
+- npm i --save-dev nodemon // để chạy nodejs(--save-dev để khi cài đặt nó vào devDependencies. Khi đưa code lên môi trường 
+chạy thực thì nó sẽ k cài nodemon(môi trường tự động reload) để đỡ nặng project. Nodemon chỉ chạy trên local thôi)
 
 - trong file package.json ở mục scripts: viết "start":"nodemon --inspect index.js"  // để khi chạy npm start 
 có thay đổi gì thì hệ thống sẽ tự động load

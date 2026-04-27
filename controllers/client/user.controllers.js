@@ -23,7 +23,12 @@ module.exports.registerPost = async (req, res) => {
     return;
   }
   req.body.password = md5(req.body.password);
-  const user = new User(req.body);
+  const user = new User({
+    fullName: req.body.fullName,
+    email: req.body.email,
+    password: req.body.password,
+    tokenUser: generateHelper.generateRandomNumber(20)
+  });
   await user.save();
   res.cookie("tokenUser", user.tokenUser);
   res.redirect("/")
